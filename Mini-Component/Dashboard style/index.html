@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Style Component - HTML & CSS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h1>Dashboard-Style Component</h1>
+      <p class="sub">Pure HTML & CSS</p>
+
+      <!-- 1. STATS WIDGETS -->
+      <section>
+        <h2><span class="num">1</span> Stats / Analytics Widgets</h2>
+        <div class="row">
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon blue">💰</div>
+              <div class="stat-trend up">+12.4%</div>
+            </div>
+            <div class="stat-value">$48,290</div>
+            <div class="stat-label">Total Revenue</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon green">👥</div>
+              <div class="stat-trend up">+8.1%</div>
+            </div>
+            <div class="stat-value">2,340</div>
+            <div class="stat-label">New Users</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-icon orange">📦</div>
+              <div class="stat-trend down">-3.2%</div>
+            </div>
+            <div class="stat-value">184</div>
+            <div class="stat-label">Orders Today</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. DATA TABLE -->
+      <section>
+        <h2><span class="num">2</span> Data Table</h2>
+        <table class="data-table" id="sortTable">
+          <thead>
+            <th onclick="sortTable(0)">Name <span class="arrow">▲▼</span></th>
+            <th onclick="sortTable(1)">Role <span class="arrow">▲▼</span></th>
+            <th onclick="sortTable(2)">Status <span class="arrow">▲▼</span></th>
+            <th onclick="sortTable(3)">Joined <span class="arrow">▲▼</span></th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="user-cell">
+                  <img src="https://i.pravatar.cc/40?img=5" alt="" /> Emma
+                  Watson
+                </div>
+              </td>
+              <td>Designer</td>
+              <td><span class="status-pill active">Active</span></td>
+              <td>Jan 12, 2024</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="user-cell">
+                  <img src="https://i.pravatar.cc/40?img=8" alt="" /> James
+                  Copper
+                </div>
+              </td>
+              <td>Developer</td>
+              <td><span class="status-pill active">Active</span></td>
+              <td>Nov 3, 2024</td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="user-cell">
+                  <img src="https://i.pravatar.cc/40?img=9" alt="" /> Nina Patel
+                </div>
+              </td>
+              <td>Marketing</td>
+              <td><span class="status-pill inactive">Inactive</span></td>
+              <td>Mar 20, 2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 3. SETTINGS PAGE LAYOUT -->
+      <section>
+        <h2><span class="num">4</span> Settings Page Layout</h2>
+        <div class="settings-frame">
+          <nav class="settings-nav">
+            <a href="#">General</a>
+            <a href="#" class="active">Notifications</a>
+            <a href="#">Security</a>
+            <a href="#">Billing</a>
+            <a href="#">Team</a>
+          </nav>
+          <div class="settings-body">
+            <h3>Notifications</h3>
+            <p class="desc">Choose what you want to be notified about</p>
+
+            <div class="settings-row">
+              <div>
+                <div class="label">Email notifications</div>
+                <div class="hint">Get emails about your account activity</div>
+              </div>
+              <label class="mini-switch">
+                <input type="checkbox" checked />
+                <span class="mini-slider"></span>
+              </label>
+            </div>
+
+            <div class="settings-row">
+              <div>
+                <div class="label">Push notifications</div>
+                <div class="hint">Receive alerts on your device</div>
+              </div>
+              <label class="mini-switch">
+                <input type="checkbox" />
+                <span class="mini-slider"></span>
+              </label>
+            </div>
+
+            <div class="settings-row">
+              <div>
+                <div class="label">Weekly summary</div>
+                <div class="hint">A digest of your activity every Monday</div>
+              </div>
+              <label class="mini-switch">
+                <input type="checkbox" checked />
+                <span class="mini-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 404 / EMPTY STATE -->
+      <section>
+        <h2><span class="num">4</span> 404 / Empty State Page</h2>
+        <div class="empty-state">
+          <div class="code">404</div>
+          <h3>Page not Found</h3>
+          <p>The Page you're looking for doesn't exist or has been removed.</p>
+          <a href="#" class="btn">Back to Home</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- adding js logic for sorting data -->
+    <script src="script.js"></script>
+  </body>
+</html>
