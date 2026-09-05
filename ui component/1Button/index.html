@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8 Basics UI Component - HTML & CSS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h1>8 Basic UI Components</h1>
+      <p class="sub">Pure HTML & CSS</p>
+
+      <!-- 1. Buttons -->
+      <section>
+        <h2><span class="num">1</span> Buttons</h2>
+        <div class="row">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-outline">Outline</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-disabled" disabled>Disabled</button>
+        </div>
+      </section>
+
+      <!-- 2. Badges / Tags / Chips -->
+      <section>
+        <h2><span class="num">2</span> Badges, Tags &amp; Chips</h2>
+        <div class="row">
+          <span class="badge badge-success">
+            <span class="badge-dot"></span>Active</span
+          >
+
+          <span class="badge badge-warning">
+            <span class="badge-dot"></span>Pending</span
+          >
+
+          <span class="badge badge-error">
+            <span class="badge-dot"></span>Failed</span
+          >
+
+          <span class="badge badge-neutral">
+            <span class="badge-dot"></span>Draft</span
+          >
+
+          <span class="chip">Design <button>x</button></span>
+          <span class="chip">Frontend <button>x</button></span>
+        </div>
+      </section>
+
+      <!-- 3. Avatar -->
+      <section>
+        <h2><span class="num">3</span> Avatar</h2>
+        <div class="row">
+          <div class="avatar" style="background: #4f46e5">AK</div>
+          <div class="avatar" style="background: #f59e0b">JS</div>
+          <div class="avatar avatar-status" style="background: #10b981">
+            <img src="https://i.pravatar.cc/100?img=12" alt="user avatar" />
+          </div>
+
+          <div class="avatar-group">
+            <div class="avatar" style="background: #ef4444">A</div>
+            <div class="avatar" style="background: #3b82f6">B</div>
+            <div class="avatar" style="background: #8b5cf6">C</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Toggle Switch -->
+      <section>
+        <h2><span class="num">4</span> Toggle Switch</h2>
+        <div class="row">
+          <label class="switch">
+            <input type="checkbox" />
+            <span class="slider"></span>
+          </label>
+          <label class="switch">
+            <input type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- 5. Checkbox & radio -->
+      <section>
+        <h2><span class="num">5</span> Checkbox &amp; Radio</h2>
+        <div class="row">
+          <label class="custom-check">
+            <input type="checkbox" checked />
+            <span class="check-box"></span> Accept Terms
+          </label>
+          <label class="custom-radio">
+            <input type="radio" name="plan" checked />
+            <span class="radio-box"></span> Monthly
+          </label>
+          <label class="custom-radio">
+            <input type="radio" name="plan" />
+            <span class="radio-box"></span> Yearly
+          </label>
+        </div>
+      </section>
+
+      <!-- 6. Loading Spinner / Skeleton -->
+      <section>
+        <h2><span class="num">6</span> Loading Spinner &amp; Skeleton</h2>
+        <div class="row">
+          <div class="spinner"></div>
+          <div class="dot-spinner"><span></span><span></span><span></span></div>
+          <div class="skeleton-group">
+            <div class="row row-spinner" style="gap: 10px">
+              <div class="skeleton circle"></div>
+              <div style="flex: 1">
+                <div class="skeleton line-lg" style="margin-bottom: 6px"></div>
+                <div class="skeleton line-sm"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Progress Bar -->
+      <section>
+        <h2><span class="num">7</span> Progress Bar</h2>
+        <div class="progress-wrap">
+          <div class="progress-lable">
+            <span>Uploading...</span>
+            <span>72%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Tool Tip -->
+      <section>
+        <h2><span class="num">8</span> ToolTip</h2>
+        <div class="row">
+          <span class="tooltip"
+            >Hover Me
+            <span class="tooltip-text">This is a tooltip</span>
+          </span>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
