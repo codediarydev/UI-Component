@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toggle Switches Showcase</title>
+    <style>
+      /* --- CSS Variables / Theme --- */
+      :root {
+        --page-bg: #0d1117;
+        --card-bg: #161b22;
+        --card-border: #30363d;
+        --highlight-border: #1a7f37;
+        --accent-active: #38bdf8;
+        --text-main: #c9d1d9;
+        --text-sub: #8b949e;
+        --code-main: #ff7b72;
+        --code-sub: #79c0ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: var(--page-bg);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1.gallery-title {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: var(--accent-active);
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        margin-bottom: 40px;
+      }
+
+      /* Container for vertically stacked cards */
+      .container {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      /* Card Layout Structure */
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--highlight-border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
+      /* Large Playground Section */
+      .playground {
+        height: 220px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        border-bottom: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Code Snippet Formatting */
+      .code-snippet {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 16px 20px;
+      }
+
+      .code-snippet pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .code-snippet code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.88rem;
+        color: var(--code-sub);
+      }
+
+      .sel {
+        color: var(--code-main);
+        font-weight: 500;
+      }
+
+      /* Base Checkbox Reset */
+      .toggle-input {
+        display: none;
+      }
+
+      .toggle-label {
+        position: relative;
+        display: inline-block;
+        width: 68px;
+        height: 36px;
+        background-color: #21262d;
+        border: 1px solid var(--card-border);
+        border-radius: 36px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .toggle-knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 28px;
+        height: 28px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+
+      /* ================= 10 TOGGLE VARIANTS ================= */
+
+      /* 1. Sun & Moon Theme Switch */
+      .t-1:checked + .toggle-label {
+        background-color: #0284c7;
+        border-color: #38bdf8;
+      }
+      .t-1:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+        background-color: #fef08a;
+      }
+      .t-1 + .toggle-label .toggle-knob::before {
+        content: "🌙";
+      }
+      .t-1:checked + .toggle-label .toggle-knob::before {
+        content: "☀️";
+      }
+
+      /* 2. Neon Pill Glow */
+      .t-2:checked + .toggle-label {
+        background-color: #0f172a;
+        border-color: var(--accent-active);
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+      }
+      .t-2:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+        background-color: var(--accent-active);
+        box-shadow: 0 0 10px var(--accent-active);
+      }
+
+      /* 3. Elastic Liquid Stretch */
+      .t-3 + .toggle-label .toggle-knob {
+        transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      }
+      .t-3:checked + .toggle-label {
+        background-color: #10b981;
+      }
+      .t-3:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+      }
+
+      /* 4. Binary ON / OFF State Text */
+      .t-4 + .toggle-label::after {
+        content: "OFF";
+        position: absolute;
+        right: 10px;
+        top: 9px;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-sub);
+      }
+      .t-4:checked + .toggle-label::after {
+        content: "ON";
+        left: 12px;
+        right: auto;
+        color: #fff;
+      }
+      .t-4:checked + .toggle-label {
+        background-color: #22c55e;
+      }
+      .t-4:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+      }
+
+      /* 5. 3D Push Button Inset */
+      .t-5 + .toggle-label {
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
+      }
+      .t-5:checked + .toggle-label {
+        background-color: #8b5cf6;
+      }
+      .t-5:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      }
+
+      /* 6. Minimal Line Track */
+      .t-6 + .toggle-label {
+        height: 12px;
+        width: 60px;
+        border-radius: 12px;
+        background-color: #30363d;
+        border: none;
+      }
+      .t-6 + .toggle-label .toggle-knob {
+        top: -8px;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        background-color: #8b949e;
+      }
+      .t-6:checked + .toggle-label {
+        background-color: rgba(56, 189, 248, 0.4);
+      }
+      .t-6:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+        background-color: var(--accent-active);
+      }
+
+      /* 7. Icon Morphing Switch */
+      .t-7 + .toggle-label .toggle-knob::before {
+        content: "✖";
+        font-size: 10px;
+        color: #6e7681;
+      }
+      .t-7:checked + .toggle-label .toggle-knob::before {
+        content: "✔";
+        font-size: 10px;
+        color: #22c55e;
+      }
+      .t-7:checked + .toggle-label {
+        background-color: rgba(34, 197, 94, 0.2);
+        border-color: #22c55e;
+      }
+      .t-7:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+      }
+
+      /* 8. Vertical Flip Knob */
+      .t-8 + .toggle-label .toggle-knob {
+        transform-origin: center;
+      }
+      .t-8:checked + .toggle-label {
+        background-color: #f97316;
+      }
+      .t-8:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px) rotateY(180deg);
+        background-color: #fff;
+      }
+
+      /* 9. Segmented Sliding Pill */
+      .segmented-control {
+        display: flex;
+        background: #161b22;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        padding: 4px;
+        gap: 4px;
+      }
+      .segmented-control label {
+        padding: 6px 16px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text-sub);
+        cursor: pointer;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+      .t-9-a:checked ~ .seg-a,
+      .t-9-b:checked ~ .seg-b {
+        background: var(--accent-active);
+        color: #000;
+      }
+
+      /* 10. Gradient Sweep Trail */
+      .t-10 + .toggle-label {
+        background: linear-gradient(90deg, #30363d 50%, #ec4899 50%);
+        background-size: 200% 100%;
+        background-position: 0 0;
+      }
+      .t-10:checked + .toggle-label {
+        background-position: -100% 0;
+      }
+      .t-10:checked + .toggle-label .toggle-knob {
+        transform: translateX(32px);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="gallery-title">Toggle Switches</h1>
+    <p class="subtitle">Click controls to test interactive toggle animations</p>
+
+    <div class="container">
+      <!-- Variant 1 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">1. Sun & Moon Theme Switch</div>
+          <div class="card-description">
+            Transitions between dark mode moon and light mode sun.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t1" class="toggle-input t-1" />
+          <label for="t1" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:checked + .label .knob</span> {
+  transform: translateX(32px);
+  background-color: #fef08a;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">2. Neon Pill Glow</div>
+          <div class="card-description">
+            Casts a vivid outer neon glow box-shadow when active.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t2" class="toggle-input t-2" />
+          <label for="t2" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:checked + .label</span> {
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 3 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">3. Elastic Liquid Stretch</div>
+          <div class="card-description">
+            Uses cubic-bezier spring mechanics for fluid motion.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t3" class="toggle-input t-3" />
+          <label for="t3" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.knob</span> {
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 4 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">4. Binary ON / OFF Text</div>
+          <div class="card-description">
+            Displays explicit status label text inside the track.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t4" class="toggle-input t-4" />
+          <label for="t4" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:checked + .label::after</span> {
+  content: 'ON';
+  left: 12px;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 5 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">5. 3D Push Button Inset</div>
+          <div class="card-description">
+            Simulates deep tactile groove and raised knob shadow.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t5" class="toggle-input t-5" />
+          <label for="t5" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.label</span> {
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 6 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">6. Minimal Line Track</div>
+          <div class="card-description">
+            Slender center rail with an oversized floating thumb.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t6" class="toggle-input t-6" />
+          <label for="t6" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.label</span> { height: 12px; width: 60px; }
+<span class="sel">.knob</span> { top: -8px; width: 28px; height: 28px; }</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 7 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">7. Icon Morphing Switch</div>
+          <div class="card-description">
+            Swaps internal state icons (check / cross) on toggle.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t7" class="toggle-input t-7" />
+          <label for="t7" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:checked + .label .knob::before</span> {
+  content: '✔';
+  color: #22c55e;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 8 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">8. Vertical Flip Knob</div>
+          <div class="card-description">
+            Rotates knob on Y-axis while moving across track.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t8" class="toggle-input t-8" />
+          <label for="t8" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:checked + .label .knob</span> {
+  transform: translateX(32px) rotateY(180deg);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 9 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">9. Segmented Sliding Pill</div>
+          <div class="card-description">
+            Dual-option tabbed toggle segment format.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="segmented-control">
+            <input
+              type="radio"
+              id="t9-a"
+              name="seg"
+              class="toggle-input t-9-a"
+              checked
+            />
+            <input
+              type="radio"
+              id="t9-b"
+              name="seg"
+              class="toggle-input t-9-b"
+            />
+            <label for="t9-a" class="seg-a">Monthly</label>
+            <label for="t9-b" class="seg-b">Yearly</label>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.radio:checked ~ .seg-label</span> {
+  background: #38bdf8;
+  color: #000;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 10 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">10. Gradient Sweep Trail</div>
+          <div class="card-description">
+            Pulls a colorful background gradient behind sliding knob.
+          </div>
+        </div>
+        <div class="playground">
+          <input type="checkbox" id="t10" class="toggle-input t-10" />
+          <label for="t10" class="toggle-label"
+            ><span class="toggle-knob"></span
+          ></label>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:checked + .label</span> {
+  background-position: -100% 0;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

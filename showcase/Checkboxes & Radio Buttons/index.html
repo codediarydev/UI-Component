@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkboxes & Radio Buttons Showcase</title>
+  <style>
+    /* --- CSS Variables / Theme --- */
+    :root {
+      --page-bg: #0d1117;
+      --card-bg: #161b22;
+      --card-border: #30363d;
+      --highlight-border: #1a7f37;
+      --accent-active: #38bdf8;
+      --text-main: #c9d1d9;
+      --text-sub: #8b949e;
+      --code-main: #ff7b72;
+      --code-sub: #79c0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1.gallery-title {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      color: var(--accent-active);
+    }
+
+    p.subtitle {
+      color: var(--text-sub);
+      margin-bottom: 40px;
+    }
+
+    /* Container for vertically stacked cards */
+    .container {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Card Layout Structure */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--highlight-border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+
+    /* Large Playground Section */
+    .playground {
+      height: 220px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Code Snippet Formatting */
+    .code-snippet {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 16px 20px;
+    }
+
+    .code-snippet pre {
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .code-snippet code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.88rem;
+      color: var(--code-sub);
+    }
+
+    .sel { color: var(--code-main); font-weight: 500; }
+
+    /* Base Reset for Custom Inputs */
+    .custom-input {
+      display: none;
+    }
+
+    .control-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-main);
+      user-select: none;
+    }
+
+    /* ================= 10 CHECKBOX & RADIO VARIANTS ================= */
+
+    /* 1. Animated Checkmark Draw */
+    .box-1 {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--card-border);
+      border-radius: 6px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .box-1::after {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) scale(0);
+      transition: transform 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    }
+    .c-1:checked + .control-label .box-1 {
+      background-color: var(--accent-active);
+      border-color: var(--accent-active);
+    }
+    .c-1:checked + .control-label .box-1::after {
+      transform: rotate(45deg) scale(1);
+    }
+
+    /* 2. Pulsing Radio Core */
+    .radio-2 {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--card-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .radio-2::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background-color: var(--accent-active);
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.2s ease;
+    }
+    .r-2:checked + .control-label .radio-2 {
+      border-color: var(--accent-active);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+    .r-2:checked + .control-label .radio-2::after {
+      transform: scale(1);
+    }
+
+    /* 3. Glowing Neon Tile */
+    .tile-3 {
+      padding: 12px 20px;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      background: #0d1117;
+      transition: all 0.3s ease;
+    }
+    .c-3:checked + .tile-3 {
+      border-color: var(--accent-active);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+      color: #fff;
+    }
+
+    /* 4. Elastic Spring Morph */
+    .box-4 {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--card-border);
+      border-radius: 6px;
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    .c-4:checked + .control-label .box-4 {
+      background-color: #22c55e;
+      border-color: #22c55e;
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    /* 5. 3D Inset Push Button */
+    .box-5 {
+      width: 22px;
+      height: 22px;
+      background: #0d1117;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+      transition: all 0.2s ease;
+    }
+    .c-5:checked + .control-label .box-5 {
+      background-color: #8b5cf6;
+      border-color: #8b5cf6;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.5);
+    }
+
+    /* 6. Expanding Ripple Fill */
+    .radio-6 {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--card-border);
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+    .radio-6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent-active);
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.3s ease;
+    }
+    .r-6:checked + .control-label .radio-6::before {
+      transform: scale(1);
+    }
+
+    /* 7. Icon Morph Swap */
+    .box-7 {
+      font-size: 1.2rem;
+      transition: all 0.2s ease;
+    }
+    .box-7::before { content: '⬜'; }
+    .c-7:checked + .control-label .box-7::before { content: '✅'; }
+
+    /* 8. Segmented Choice Card */
+    .card-choice {
+      display: flex;
+      flex-direction: column;
+      padding: 14px 20px;
+      background: #0d1117;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      cursor: pointer;
+      width: 220px;
+      transition: all 0.3s ease;
+    }
+    .card-choice span { font-size: 0.8rem; color: var(--text-sub); }
+    .r-8:checked + .card-choice {
+      border-color: var(--accent-active);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    /* 9. Minimal Underline Reveal */
+    .line-9 {
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .line-9::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-active);
+      transition: width 0.3s ease;
+    }
+    .c-9:checked + .line-9::after {
+      width: 100%;
+    }
+
+    /* 10. Gradient Border Ring */
+    .radio-10 {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      padding: 2px;
+      background: var(--card-border);
+      transition: background 0.3s ease;
+    }
+    .radio-10-inner {
+      width: 100%;
+      height: 100%;
+      background: #0d1117;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+    .r-10:checked + .control-label .radio-10 {
+      background: linear-gradient(45deg, #38bdf8, #ec4899);
+    }
+    .r-10:checked + .control-label .radio-10-inner {
+      background: #0d1117;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="gallery-title">Checkboxes & Radio Buttons</h1>
+  <p class="subtitle">Click controls to test interactive selection states</p>
+
+  <div class="container">
+
+    <!-- Variant 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">1. Animated Checkmark Draw</div>
+        <div class="card-description">Checkmark vector scales smoothly into place upon selection.</div>
+      </div>
+      <div class="playground">
+        <input type="checkbox" id="c1" class="custom-input c-1" />
+        <label for="c1" class="control-label">
+          <span class="box-1"></span>
+          Enable Notifications
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.input:checked + .label .box::after</span> {
+  transform: rotate(45deg) scale(1);
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">2. Pulsing Radio Core</div>
+        <div class="card-description">Radio dot pops with an outer glowing accent shadow.</div>
+      </div>
+      <div class="playground">
+        <input type="radio" id="r2" name="r-group" class="custom-input r-2" />
+        <label for="r2" class="control-label">
+          <span class="radio-2"></span>
+          Standard Delivery
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.radio:checked + .label .circle</span> {
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 3 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">3. Glowing Neon Tile</div>
+        <div class="card-description">Entire container button lights up with a subtle blue aura.</div>
+      </div>
+      <div class="playground">
+        <input type="checkbox" id="c3" class="custom-input c-3" />
+        <label for="c3" class="tile-3 control-label">
+          Dark Mode Option
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.input:checked + .tile</span> {
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 4 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">4. Elastic Spring Morph</div>
+        <div class="card-description">Bouncy rotation and scaling effect using cubic-bezier curves.</div>
+      </div>
+      <div class="playground">
+        <input type="checkbox" id="c4" class="custom-input c-4" />
+        <label for="c4" class="control-label">
+          <span class="box-4"></span>
+          Auto-Save Progress
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.input:checked + .label .box</span> {
+  transform: scale(1.15) rotate(5deg);
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 5 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">5. 3D Inset Push Button</div>
+        <div class="card-description">Recessed shadow lifts into an active elevated button state.</div>
+      </div>
+      <div class="playground">
+        <input type="checkbox" id="c5" class="custom-input c-5" />
+        <label for="c5" class="control-label">
+          <span class="box-5"></span>
+          High Performance
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.input:checked + .label .box</span> {
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.5);
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 6 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">6. Expanding Ripple Fill</div>
+        <div class="card-description">Smooth radial scale explosion inside the radio indicator.</div>
+      </div>
+      <div class="playground">
+        <input type="radio" id="r6" name="r-group2" class="custom-input r-6" />
+        <label for="r6" class="control-label">
+          <span class="radio-6"></span>
+          Express Shipping
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.radio:checked + .label .circle::before</span> {
+  transform: scale(1);
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 7 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">7. Icon Morph Swap</div>
+        <div class="card-description">Swaps unchecked glyph symbol to active checked glyph.</div>
+      </div>
+      <div class="playground">
+        <input type="checkbox" id="c7" class="custom-input c-7" />
+        <label for="c7" class="control-label">
+          <span class="box-7"></span>
+          Accept Terms & Conditions
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.input:checked + .label .box::before</span> {
+  content: '✅';
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 8 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">8. Segmented Choice Card</div>
+        <div class="card-description">Rich selectable card container featuring subtext details.</div>
+      </div>
+      <div class="playground">
+        <input type="radio" id="r8" name="r-card" class="custom-input r-8" />
+        <label for="r8" class="card-choice">
+          <strong>Pro License</strong>
+          <span>For teams & organizations</span>
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.radio:checked + .card-choice</span> {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.05);
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 9 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">9. Minimal Underline Reveal</div>
+        <div class="card-description">Underline sweeps left-to-right beneath active text label.</div>
+      </div>
+      <div class="playground">
+        <input type="checkbox" id="c9" class="custom-input c-9" />
+        <label for="c9" class="control-label line-9">
+          Subscribe to Newsletter
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.input:checked + .label::after</span> {
+  width: 100%;
+}</code></pre>
+      </div>
+    </div>
+
+    <!-- Variant 10 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">10. Gradient Border Ring</div>
+        <div class="card-description">Outer perimeter lights up with a multi-color gradient ring.</div>
+      </div>
+      <div class="playground">
+        <input type="radio" id="r10" name="r-group3" class="custom-input r-10" />
+        <label for="r10" class="control-label">
+          <span class="radio-10"><span class="radio-10-inner"></span></span>
+          Premium Subscription
+        </label>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.radio:checked + .label .ring</span> {
+  background: linear-gradient(45deg, #38bdf8, #ec4899);
+}</code></pre>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

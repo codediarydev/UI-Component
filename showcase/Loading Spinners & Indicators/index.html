@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Spinners & Indicators Showcase</title>
+    <style>
+      /* --- CSS Variables / Theme --- */
+      :root {
+        --page-bg: #0d1117;
+        --card-bg: #161b22;
+        --card-border: #30363d;
+        --highlight-border: #1a7f37;
+        --accent-active: #38bdf8;
+        --text-main: #c9d1d9;
+        --text-sub: #8b949e;
+        --code-main: #ff7b72;
+        --code-sub: #79c0ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: var(--page-bg);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1.gallery-title {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: var(--accent-active);
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        margin-bottom: 40px;
+      }
+
+      /* Container for vertically stacked cards */
+      .container {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      /* Card Layout Structure */
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--highlight-border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
+      /* Large Playground Section */
+      .playground {
+        height: 220px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        border-bottom: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Code Snippet Formatting */
+      .code-snippet {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 16px 20px;
+      }
+
+      .code-snippet pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .code-snippet code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.88rem;
+        color: var(--code-sub);
+      }
+
+      .sel {
+        color: var(--code-main);
+        font-weight: 500;
+      }
+
+      /* ================= 10 SPINNER & INDICATOR VARIANTS ================= */
+
+      /* 1. Classic Dual-Ring Spinner */
+      .spinner-1 {
+        width: 44px;
+        height: 44px;
+        border: 4px solid var(--card-border);
+        border-top-color: var(--accent-active);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* 2. Pulsing Wave Dots */
+      .spinner-2 {
+        display: flex;
+        gap: 8px;
+      }
+      .spinner-2 div {
+        width: 12px;
+        height: 12px;
+        background: var(--accent-active);
+        border-radius: 50%;
+        animation: wave 1.2s infinite ease-in-out;
+      }
+      .spinner-2 div:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .spinner-2 div:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes wave {
+        0%,
+        80%,
+        100% {
+          transform: scale(0.4);
+          opacity: 0.3;
+        }
+        40% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* 3. Glowing Neon Orbit Ring */
+      .spinner-3 {
+        width: 44px;
+        height: 44px;
+        border: 3px solid transparent;
+        border-top-color: var(--accent-active);
+        border-right-color: var(--accent-active);
+        border-radius: 50%;
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+        animation: spin 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+      }
+
+      /* 4. Flipping Square Block */
+      .spinner-4 {
+        width: 32px;
+        height: 32px;
+        background: #818cf8;
+        animation: flip-block 1.2s infinite ease-in-out;
+      }
+      @keyframes flip-block {
+        0% {
+          transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        }
+        50% {
+          transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        }
+        100% {
+          transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        }
+      }
+
+      /* 5. Expanding Radar Pulse */
+      .spinner-5 {
+        width: 44px;
+        height: 44px;
+        background-color: var(--accent-active);
+        border-radius: 50%;
+        animation: radar-pulse 1.2s infinite ease-in-out;
+      }
+      @keyframes radar-pulse {
+        0% {
+          transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      /* 6. Continuous Progress Bar */
+      .spinner-6-wrap {
+        width: 220px;
+        height: 6px;
+        background: var(--card-border);
+        border-radius: 3px;
+        overflow: hidden;
+        position: relative;
+      }
+      .spinner-6-bar {
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-active), #818cf8);
+        position: absolute;
+        border-radius: 3px;
+        animation: bar-slide 1.5s infinite ease-in-out;
+      }
+      @keyframes bar-slide {
+        0% {
+          left: -40%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      /* 7. Dual Interlocking Rings */
+      .spinner-7 {
+        position: relative;
+        width: 44px;
+        height: 44px;
+      }
+      .spinner-7 div {
+        box-sizing: border-box;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 3px solid transparent;
+        border-radius: 50%;
+        animation: ring-rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      }
+      .spinner-7 div:nth-child(1) {
+        border-top-color: var(--accent-active);
+      }
+      .spinner-7 div:nth-child(2) {
+        border-bottom-color: #ec4899;
+        animation-delay: -0.45s;
+      }
+      @keyframes ring-rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* 8. Bouncing Ball Orbit */
+      .spinner-8 {
+        width: 44px;
+        height: 44px;
+        position: relative;
+        animation: spin 1.5s linear infinite;
+      }
+      .spinner-8::before,
+      .spinner-8::after {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        background: #22c55e;
+        border-radius: 50%;
+        top: 0;
+        animation: bounce-orbit 1s infinite ease-in-out alternate;
+      }
+      .spinner-8::after {
+        top: auto;
+        bottom: 0;
+        right: 0;
+        background: var(--accent-active);
+        animation-delay: -0.5s;
+      }
+      @keyframes bounce-orbit {
+        0% {
+          transform: scale(0.3);
+        }
+        100% {
+          transform: scale(1.2);
+        }
+      }
+
+      /* 9. Minimalist Circular Dash */
+      .spinner-9 {
+        width: 44px;
+        height: 44px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-left-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+
+      /* 10. Gradient Spinner Wheel */
+      .spinner-10 {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          transparent 0%,
+          var(--accent-active) 100%
+        );
+        mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 4px),
+          #fff 0
+        );
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 4px),
+          #fff 0
+        );
+        animation: spin 0.8s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="gallery-title">Loading Spinners & Indicators</h1>
+    <p class="subtitle">
+      CSS-only animated status indicators and loading states
+    </p>
+
+    <div class="container">
+      <!-- Variant 1 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">1. Classic Dual-Ring Spinner</div>
+          <div class="card-description">
+            Standard circular border spinner with dynamic top edge color.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-1"></div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.spinner</span> {
+  border: 4px solid #30363d;
+  border-top-color: #38bdf8;
+  animation: spin 0.8s linear infinite;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">2. Pulsing Wave Dots</div>
+          <div class="card-description">
+            Sequential staggering scaling dot array for subtle activity cues.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-2">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.dots div</span> {
+  animation: wave 1.2s infinite ease-in-out;
+}
+<span class="sel">.dots div:nth-child(2)</span> { animation-delay: 0.2s; }</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 3 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">3. Glowing Neon Orbit Ring</div>
+          <div class="card-description">
+            Cubic-bezier acceleration paired with high-intensity neon drop
+            shadow.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-3"></div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.spinner</span> {
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  animation: spin 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 4 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">4. Flipping Square Block</div>
+          <div class="card-description">
+            3D perspective cube flipping sequence along multiple axes.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-4"></div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">@keyframes flip-block</span> {
+  0% { transform: perspective(120px) rotateX(0deg); }
+  50% { transform: perspective(120px) rotateX(-180deg); }
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 5 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">5. Expanding Radar Pulse</div>
+          <div class="card-description">
+            Concentric expanding circle scaling outward while fading to opacity
+            zero.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-5"></div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">@keyframes radar-pulse</span> {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1.2); opacity: 0; }
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 6 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">6. Continuous Progress Bar</div>
+          <div class="card-description">
+            Linear horizontal loading indicator sliding smoothly end-to-end.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-6-wrap">
+            <div class="spinner-6-bar"></div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.bar</span> {
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  animation: bar-slide 1.5s infinite ease-in-out;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 7 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">7. Dual Interlocking Rings</div>
+          <div class="card-description">
+            Two staggered concentric rings rotating on opposing phase
+            frequencies.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-7">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.ring-2</span> {
+  border-bottom-color: #ec4899;
+  animation-delay: -0.45s;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 8 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">8. Bouncing Ball Orbit</div>
+          <div class="card-description">
+            Orbiting multi-colored nodes scaling rhythmically in sequence.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-8"></div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.orbit::before, .orbit::after</span> {
+  animation: bounce-orbit 1s infinite ease-in-out alternate;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 9 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">9. Minimalist Circular Dash</div>
+          <div class="card-description">
+            High-speed single stroke dash on a muted track line background.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-9"></div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.dash</span> {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-left-color: #fff;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 10 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">10. Gradient Spinner Wheel</div>
+          <div class="card-description">
+            Smooth conic gradient trail masked into a seamless ring border.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="spinner-10"></div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.spinner</span> {
+  background: conic-gradient(from 0deg, transparent 0%, #38bdf8 100%);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #fff 0);
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

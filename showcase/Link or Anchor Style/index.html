@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link / Anchor Styles Showcase</title>
+    <style>
+      /* --- CSS Variables / Theme --- */
+      :root {
+        --page-bg: #0d1117;
+        --card-bg: #161b22;
+        --card-border: #30363d;
+        --highlight-border: #1a7f37;
+        --accent-active: #38bdf8;
+        --text-main: #c9d1d9;
+        --text-sub: #8b949e;
+        --code-main: #ff7b72;
+        --code-sub: #79c0ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: var(--page-bg);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1.gallery-title {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: var(--accent-active);
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        margin-bottom: 40px;
+      }
+
+      /* Container for vertically stacked cards */
+      .container {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      /* Card Layout Structure */
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--highlight-border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
+      /* Large Playground Section */
+      .playground {
+        height: 220px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        border-bottom: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Code Snippet Formatting */
+      .code-snippet {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 16px 20px;
+      }
+
+      .code-snippet pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .code-snippet code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.88rem;
+        color: var(--code-sub);
+      }
+
+      .sel {
+        color: var(--code-main);
+        font-weight: 500;
+      }
+
+      /* Base Link Anchor Formatting */
+      .link-target {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-main);
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+      }
+
+      /* ================= 10 LINK / ANCHOR VARIANTS ================= */
+
+      /* 1. Left-to-Right Underline Expand */
+      .link-1 {
+        position: relative;
+      }
+      .link-1::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent-active);
+        transition: width 0.3s ease;
+      }
+      .link-1:hover {
+        color: #fff;
+      }
+      .link-1:hover::after {
+        width: 100%;
+      }
+
+      /* 2. Sliding Arrow Push */
+      .link-2 .arrow {
+        transition: transform 0.3s ease;
+        color: var(--accent-active);
+      }
+      .link-2:hover {
+        color: var(--accent-active);
+      }
+      .link-2:hover .arrow {
+        transform: translateX(6px);
+      }
+
+      /* 3. Wavy Underline Pop */
+      .link-3 {
+        text-decoration: underline transparent;
+        text-underline-offset: 6px;
+        transition: all 0.3s ease;
+      }
+      .link-3:hover {
+        color: #818cf8;
+        text-decoration: underline #818cf8 wavy;
+      }
+
+      /* 4. Bracket Enclosure Framing */
+      .link-4::before,
+      .link-4::after {
+        opacity: 0;
+        transition: all 0.3s ease;
+        color: var(--accent-active);
+      }
+      .link-4::before {
+        content: "[";
+        transform: translateX(8px);
+      }
+      .link-4::after {
+        content: "]";
+        transform: translateX(-8px);
+      }
+      .link-4:hover {
+        color: #fff;
+      }
+      .link-4:hover::before,
+      .link-4:hover::after {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* 5. Glowing Text & Shadow */
+      .link-5:hover {
+        color: var(--accent-active);
+        text-shadow:
+          0 0 10px rgba(56, 189, 248, 0.7),
+          0 0 20px rgba(56, 189, 248, 0.4);
+      }
+
+      /* 6. Background Pill Highlight */
+      .link-6 {
+        padding: 6px 16px;
+        border-radius: 20px;
+        background: transparent;
+        border: 1px solid transparent;
+      }
+      .link-6:hover {
+        background: rgba(56, 189, 248, 0.1);
+        border-color: rgba(56, 189, 248, 0.4);
+        color: var(--accent-active);
+      }
+
+      /* 7. Underline Drop Down */
+      .link-7 {
+        position: relative;
+      }
+      .link-7::after {
+        content: "";
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-active);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      .link-7:hover::after {
+        opacity: 1;
+        bottom: -4px;
+      }
+
+      /* 8. External Icon Bounce Shift */
+      .link-8 .ext-icon {
+        font-size: 0.9rem;
+        transition: transform 0.3s ease;
+      }
+      .link-8:hover {
+        color: #22c55e;
+      }
+      .link-8:hover .ext-icon {
+        transform: translate(3px, -3px);
+      }
+
+      /* 9. Center-Out Strike-Through Flip */
+      .link-9 {
+        position: relative;
+      }
+      .link-9::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: #ec4899;
+        transition: all 0.3s ease;
+        transform: translate(-50%, -50%);
+      }
+      .link-9:hover {
+        color: #ec4899;
+      }
+      .link-9:hover::after {
+        width: 100%;
+      }
+
+      /* 10. Gradient Border Sweep */
+      .link-10 {
+        position: relative;
+        padding-bottom: 2px;
+        background: linear-gradient(90deg, #38bdf8, #ec4899);
+        background-size: 0% 2px;
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        transition: background-size 0.3s ease;
+      }
+      .link-10:hover {
+        background-size: 100% 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="gallery-title">Link / Anchor Styles</h1>
+    <p class="subtitle">
+      Hover over anchors to test interactive link indicators
+    </p>
+
+    <div class="container">
+      <!-- Variant 1 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">1. Left-to-Right Underline Expand</div>
+          <div class="card-description">
+            Line grows horizontally from left edge across to full width.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-1">Read Documentation</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link::after</span> {
+  content: '';
+  width: 0;
+  transition: width 0.3s ease;
+}
+<span class="sel">.link:hover::after</span> { width: 100%; }</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">2. Sliding Arrow Push</div>
+          <div class="card-description">
+            Icon translates smoothly to the right on hover.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-2"
+            >Explore Features <span class="arrow">→</span></a
+          >
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover .arrow</span> {
+  transform: translateX(6px);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 3 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">3. Wavy Underline Pop</div>
+          <div class="card-description">
+            Reveals an indigo decorative wavy baseline stroke.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-3">Playful Link State</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover</span> {
+  text-decoration: underline #818cf8 wavy;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 4 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">4. Bracket Enclosure Framing</div>
+          <div class="card-description">
+            Flanking brackets pinch inward to highlight anchor text.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-4">System Settings</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover::before, .link:hover::after</span> {
+  opacity: 1;
+  transform: translateX(0);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 5 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">5. Glowing Text & Shadow</div>
+          <div class="card-description">
+            Casts a dual-layer cyan neon text glow.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-5">Cyberpunk Link</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover</span> {
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 6 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">6. Background Pill Highlight</div>
+          <div class="card-description">
+            Fills background with a translucent rounded pill badge.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-6">Interactive Tag</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover</span> {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.4);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 7 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">7. Underline Drop Down</div>
+          <div class="card-description">
+            Underline line drops down into place from inside text.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-7">Drop Baseline</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover::after</span> {
+  opacity: 1;
+  bottom: -4px;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 8 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">8. External Icon Bounce Shift</div>
+          <div class="card-description">
+            External launch arrow shifts diagonally northeast.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-8"
+            >External Portal <span class="ext-icon">↗</span></a
+          >
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover .icon</span> {
+  transform: translate(3px, -3px);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 9 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">9. Center-Out Strike-Through Flip</div>
+          <div class="card-description">
+            Line expands outwards from the center to strike text.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-9">Cancel Action</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover::after</span> {
+  width: 100%;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 10 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">10. Gradient Border Sweep</div>
+          <div class="card-description">
+            Sweeps a multi-color gradient line along bottom perimeter.
+          </div>
+        </div>
+        <div class="playground">
+          <a href="#" class="link-target link-10">Multi-Color Gradient</a>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.link:hover</span> {
+  background-size: 100% 2px;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

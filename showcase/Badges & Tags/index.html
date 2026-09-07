@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Badges & Tags Showcase</title>
+    <style>
+      /* --- CSS Variables / Theme --- */
+      :root {
+        --page-bg: #0d1117;
+        --card-bg: #161b22;
+        --card-border: #30363d;
+        --highlight-border: #1a7f37;
+        --accent-active: #38bdf8;
+        --text-main: #c9d1d9;
+        --text-sub: #8b949e;
+        --code-main: #ff7b72;
+        --code-sub: #79c0ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: var(--page-bg);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1.gallery-title {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: var(--accent-active);
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        margin-bottom: 40px;
+      }
+
+      /* Container for vertically stacked cards */
+      .container {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      /* Card Layout Structure */
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--highlight-border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
+      /* Large Playground Section */
+      .playground {
+        height: 220px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        border-bottom: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      /* Code Snippet Formatting */
+      .code-snippet {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 16px 20px;
+      }
+
+      .code-snippet pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .code-snippet code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.88rem;
+        color: var(--code-sub);
+      }
+
+      .sel {
+        color: var(--code-main);
+        font-weight: 500;
+      }
+
+      /* Base Tag Formatting */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        padding: 4px 12px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        cursor: default;
+      }
+
+      /* ================= 10 BADGE & TAG VARIANTS ================= */
+
+      /* 1. Muted Subsurface Pill */
+      .badge-1 {
+        background: rgba(56, 189, 248, 0.1);
+        color: var(--accent-active);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        border-radius: 20px;
+      }
+
+      /* 2. Status Dot Indicator */
+      .badge-2 {
+        background: #21262d;
+        color: var(--text-main);
+        border: 1px solid var(--card-border);
+      }
+      .badge-2::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: #22c55e;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+      }
+
+      /* 3. Neon Glow Edge */
+      .badge-3 {
+        background: #161b22;
+        color: #38bdf8;
+        border: 1px solid #38bdf8;
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+      }
+
+      /* 4. Removable / Dismissible Tag */
+      .badge-4 {
+        background: #21262d;
+        color: var(--text-main);
+        border: 1px solid var(--card-border);
+        padding-right: 8px;
+      }
+      .badge-4 .close-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--text-sub);
+        cursor: pointer;
+        font-size: 0.75rem;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .badge-4 .close-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+
+      /* 5. Gradient Border Badge */
+      .badge-5-wrap {
+        padding: 1px;
+        background: linear-gradient(90deg, #38bdf8, #ec4899);
+        border-radius: 6px;
+        display: inline-block;
+      }
+      .badge-5 {
+        background: var(--card-bg);
+        color: #fff;
+        border-radius: 5px;
+        padding: 4px 12px;
+      }
+
+      /* 6. Notification Counter Badge */
+      .badge-6-target {
+        position: relative;
+        padding: 8px 16px;
+        background: #21262d;
+        border: 1px solid var(--card-border);
+        border-radius: 6px;
+        color: #fff;
+        font-size: 0.9rem;
+      }
+      .badge-6-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #ef4444;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 10px;
+        border: 2px solid var(--page-bg);
+      }
+
+      /* 7. Metallic Foil Gradient */
+      .badge-7 {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: #fff;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+      }
+
+      /* 8. Glassmorphism Sheen */
+      .badge-8 {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+      }
+
+      /* 9. Outline Code Tag */
+      .badge-9 {
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 0.8rem;
+        background: transparent;
+        border: 1px dashed #818cf8;
+        color: #818cf8;
+      }
+
+      /* 10. Minimalist Solid Accent */
+      .badge-10 {
+        background: #ec4899;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="gallery-title">Badges & Tags</h1>
+    <p class="subtitle">Compact status labels, tags, and indicator badges</p>
+
+    <div class="container">
+      <!-- Variant 1 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">1. Muted Subsurface Pill</div>
+          <div class="card-description">
+            Translucent background fill with fully rounded pill borders.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-1">React.js</span>
+          <span class="badge badge-1">TypeScript</span>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge</span> {
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  border-radius: 20px;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">2. Status Dot Indicator</div>
+          <div class="card-description">
+            Integrates a glowing colored dot pseudo-element for live status
+            cues.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-2">Active Node</span>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge::before</span> {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 3 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">3. Neon Glow Edge</div>
+          <div class="card-description">
+            Vibrant outline border accompanied by a matching drop shadow glow.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-3">PRO PLAN</span>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge</span> {
+  border: 1px solid #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 4 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">4. Removable / Dismissible Tag</div>
+          <div class="card-description">
+            Includes an integrated close button for filter chip removal.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-4"
+            >Filter: UI/UX <span class="close-btn">✕</span></span
+          >
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.close-btn:hover</span> {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 5 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">5. Gradient Border Badge</div>
+          <div class="card-description">
+            Enclosed within a thin multi-color linear gradient perimeter.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="badge-5-wrap">
+            <span class="badge badge-5">FEATURED</span>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge-wrap</span> {
+  padding: 1px;
+  background: linear-gradient(90deg, #38bdf8, #ec4899);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 6 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">6. Notification Counter Badge</div>
+          <div class="card-description">
+            Overlaid absolute-positioned numeric indicator on a container block.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="badge-6-target">
+            Inbox
+            <span class="badge-6-count">12</span>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.counter</span> {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ef4444;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 7 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">7. Metallic Foil Gradient</div>
+          <div class="card-description">
+            Diagonal amber gradient mimicking a metallic foil badge aesthetic.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-7">GOLD MEMBER</span>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge</span> {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 8 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">8. Glassmorphism Sheen</div>
+          <div class="card-description">
+            Frosted translucent glass overlay using backdrop-filter blur.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-8">v2.4.0-beta</span>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge</span> {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 9 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">9. Outline Code Tag</div>
+          <div class="card-description">
+            Monospace typography framed by a dashed indigo border stroke.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-9">v-model</span>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge</span> {
+  font-family: monospace;
+  border: 1px dashed #818cf8;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 10 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">10. Minimalist Solid Accent</div>
+          <div class="card-description">
+            High-contrast solid block tag for direct visual callouts.
+          </div>
+        </div>
+        <div class="playground">
+          <span class="badge badge-10">NEW</span>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.badge</span> {
+  background: #ec4899;
+  color: #fff;
+  border-radius: 4px;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

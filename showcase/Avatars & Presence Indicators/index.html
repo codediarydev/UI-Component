@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatars & Presence Indicators Showcase</title>
+  <style>
+    /* --- CSS Variables / Theme --- */
+    :root {
+      --page-bg: #0d1117;
+      --card-bg: #161b22;
+      --card-border: #30363d;
+      --highlight-border: #1a7f37;
+      --accent-active: #38bdf8;
+      --text-main: #c9d1d9;
+      --text-sub: #8b949e;
+      --code-main: #ff7b72;
+      --code-sub: #79c0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1.gallery-title {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      color: var(--accent-active);
+    }
+
+    p.subtitle {
+      color: var(--text-sub);
+      margin-bottom: 40px;
+    }
+
+    /* Container for vertically stacked cards */
+    .container {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Card Layout Structure */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--highlight-border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+
+    /* Large Playground Section */
+    .playground {
+      min-height: 200px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    /* Code Snippet Formatting */
+    .code-snippet {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 16px 20px;
+    }
+
+    .code-snippet pre {
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .code-snippet code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.88rem;
+      color: var(--code-sub);
+    }
+
+    .sel { color: var(--code-main); font-weight: 500; }
+
+    /* Common Base Avatar Classes */
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--card-bg);
+    }
+
+    /* ================= 10 AVATAR VARIANTS ================= */
+
+    /* 1. Standard Circle with Online Presence Indicator */
+    .status-1 {
+      background-color: #22c55e;
+    }
+
+    /* 2. Pulsing Glow Active Status */
+    .status-2 {
+      background-color: #22c55e;
+      box-shadow: 0 0 0 rgba(34, 197, 94, 0.6);
+      animation: pulse-glow 1.8s infinite;
+    }
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    /* 3. Gradient Border Story Avatar */
+    .avatar-3-wrap {
+      padding: 3px;
+      background: linear-gradient(135deg, #ec4899, #38bdf8);
+      border-radius: 50%;
+    }
+
+    /* 4. Overlapping Avatar Stack Group */
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+    .avatar-stack .avatar {
+      width: 44px;
+      height: 44px;
+      border: 3px solid var(--card-bg);
+      margin-left: -14px;
+    }
+    .avatar-stack .avatar:first-child {
+      margin-left: 0;
+    }
+    .avatar-stack .more-count {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #30363d;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--card-bg);
+      margin-left: -14px;
+    }
+
+    /* 5. Squircle Monogram Fallback Avatar */
+    .avatar-5 {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: #38bdf8;
+      color: #0d1117;
+      font-weight: 700;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 6. Neon Halo Profile Ring */
+    .avatar-6 {
+      border: 2px solid var(--accent-active);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+    }
+
+    /* 7. Detailed Status Symbol Badges */
+    .status-7-busy {
+      background-color: #ef4444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .status-7-busy::before {
+      content: '';
+      width: 6px;
+      height: 2px;
+      background: #fff;
+    }
+
+    /* 8. Notification Unread Pill Badge */
+    .status-8-unread {
+      top: -2px;
+      right: -2px;
+      width: 20px;
+      height: 20px;
+      background: #ec4899;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 9. Glassmorphism Translucent Avatar Container */
+    .avatar-9-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px 8px 8px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+    }
+
+    /* 10. Minimalist Dot Matrix Team Grid */
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .avatar-grid .avatar {
+      width: 40px;
+      height: 40px;
+    }
+    .avatar-grid .status-badge {
+      width: 10px;
+      height: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="gallery-title">Avatars & Presence Indicators</h1>
+  <p class="subtitle">User profile images, status overlays, and avatar group stacks</p>
+
+  <div class="container">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">1. Standard Circle with Online Presence Indicator</div>
+        <div class="card-description">Classic circular user image with a solid green online status dot.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-wrapper">
+          <img class="avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="User">
+          <div class="status-badge status-1"></div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.status-online</span> {
+  background-color: #22c55e;
+  border: 2px solid #161b22;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">2. Pulsing Glow Active Status</div>
+        <div class="card-description">Live activity dot featuring a continuous keyframe pulse animation.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-wrapper">
+          <img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="User">
+          <div class="status-badge status-2"></div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.status-pulse</span> {
+  animation: pulse-glow 1.8s infinite;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">3. Gradient Border Story Avatar</div>
+        <div class="card-description">Vibrant pink-to-blue linear gradient ring framing unread stories or updates.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-3-wrap">
+          <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80" alt="User">
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.gradient-avatar</span> {
+  padding: 3px;
+  background: linear-gradient(135deg, #ec4899, #38bdf8);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">4. Overlapping Avatar Stack Group</div>
+        <div class="card-description">Cascading overlapping group members with an extra count badge.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-stack">
+          <img class="avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="User">
+          <img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="User">
+          <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80" alt="User">
+          <div class="more-count">+5</div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.avatar-stack .avatar</span> {
+  margin-left: -14px;
+  border: 3px solid #161b22;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">5. Squircle Monogram Fallback Avatar</div>
+        <div class="card-description">Rounded square fallback displaying initial letters when no image is set.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-5">JD</div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.avatar-monogram</span> {
+  border-radius: 16px;
+  background: #38bdf8;
+  color: #0d1117;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">6. Neon Halo Profile Ring</div>
+        <div class="card-description">Cyan border outline enhanced with an external glowing shadow.</div>
+      </div>
+      <div class="playground">
+        <img class="avatar avatar-6" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="User">
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.avatar-halo</span> {
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">7. Detailed Status Symbol Badges</div>
+        <div class="card-description">Red busy indicator overlay featuring an embedded minus sign glyph.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-wrapper">
+          <img class="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80" alt="User">
+          <div class="status-badge status-7-busy"></div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.status-busy</span> {
+  background-color: #ef4444;
+  display: flex;
+  align-items: center;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">8. Notification Unread Pill Badge</div>
+        <div class="card-description">Top-right numerical alert counter badge overlaying the avatar frame.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-wrapper">
+          <img class="avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80" alt="User">
+          <div class="status-badge status-8-unread">3</div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.status-unread</span> {
+  top: -2px; right: -2px;
+  background: #ec4899;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">9. Glassmorphism Translucent Avatar Container</div>
+        <div class="card-description">Frosted glass profile pill pairing avatar image with user text details.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-9-card">
+          <img class="avatar" style="width:40px; height:40px;" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="User">
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 600; color: #fff;">Alex Rivera</div>
+            <div style="font-size: 0.72rem; color: var(--text-sub);">Software Engineer</div>
+          </div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.avatar-glass-card</span> {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">10. Minimalist Dot Matrix Team Grid</div>
+        <div class="card-description">Compact multi-user grid view designed for sidebar participant lists.</div>
+      </div>
+      <div class="playground">
+        <div class="avatar-grid">
+          <div class="avatar-wrapper">
+            <img class="avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="User">
+            <div class="status-badge status-1"></div>
+          </div>
+          <div class="avatar-wrapper">
+            <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80" alt="User">
+            <div class="status-badge status-7-busy"></div>
+          </div>
+          <div class="avatar-wrapper">
+            <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80" alt="User">
+            <div class="status-badge" style="background:#f59e0b;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.avatar-grid</span> {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}</code></pre>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

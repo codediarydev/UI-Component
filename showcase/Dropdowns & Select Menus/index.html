@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdowns & Select Menus Showcase</title>
+    <style>
+      /* --- CSS Variables / Theme --- */
+      :root {
+        --page-bg: #0d1117;
+        --card-bg: #161b22;
+        --card-border: #30363d;
+        --highlight-border: #1a7f37;
+        --accent-active: #38bdf8;
+        --text-main: #c9d1d9;
+        --text-sub: #8b949e;
+        --code-main: #ff7b72;
+        --code-sub: #79c0ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: var(--page-bg);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1.gallery-title {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: var(--accent-active);
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        margin-bottom: 40px;
+      }
+
+      /* Container for vertically stacked cards */
+      .container {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      /* Card Layout Structure */
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--highlight-border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
+      /* Large Playground Section */
+      .playground {
+        min-height: 240px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        border-bottom: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        position: relative;
+      }
+
+      /* Code Snippet Formatting */
+      .code-snippet {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 16px 20px;
+      }
+
+      .code-snippet pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .code-snippet code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.88rem;
+        color: var(--code-sub);
+      }
+
+      .sel {
+        color: var(--code-main);
+        font-weight: 500;
+      }
+
+      /* Base Menu Container */
+      .dropdown-container {
+        width: 100%;
+        max-width: 260px;
+        position: relative;
+      }
+
+      .dropdown-trigger {
+        width: 100%;
+        padding: 10px 14px;
+        background: #21262d;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 0.88rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .dropdown-menu {
+        width: 100%;
+        margin-top: 6px;
+        background: #21262d;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        padding: 6px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .dropdown-item {
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+
+      .dropdown-item:hover,
+      .dropdown-item.active {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+      }
+
+      /* ================= 10 DROPDOWN VARIANTS ================= */
+
+      /* 1. Standard Select Menu */
+      .dd-1 .dropdown-item.active {
+        background: var(--accent-active);
+        color: #0d1117;
+        font-weight: 600;
+      }
+
+      /* 2. Glassmorphism Popover Menu */
+      .dd-2 .dropdown-trigger {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+      .dd-2 .dropdown-menu {
+        background: rgba(22, 27, 34, 0.8);
+        backdrop-filter: blur(12px);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+
+      /* 3. Search Filter Select */
+      .dd-3 .search-input {
+        width: 100%;
+        padding: 6px 10px;
+        background: #161b22;
+        border: 1px solid var(--card-border);
+        border-radius: 4px;
+        color: #fff;
+        font-size: 0.8rem;
+        margin-bottom: 6px;
+        outline: none;
+      }
+
+      /* 4. Multi-Select Tag Chips */
+      .dd-4 .tag-wrap {
+        display: flex;
+        gap: 4px;
+      }
+      .dd-4 .tag {
+        background: rgba(56, 189, 248, 0.15);
+        color: var(--accent-active);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+      }
+
+      /* 5. Neon Edge Active Menu */
+      .dd-5 .dropdown-menu {
+        border: 1px solid var(--accent-active);
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+      }
+
+      /* 6. Context Action Menu with Icons */
+      .dd-6 .dropdown-item {
+        justify-content: flex-start;
+        gap: 10px;
+      }
+
+      /* 7. Categorized Grouped Select */
+      .dd-7 .group-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--text-sub);
+        padding: 6px 12px 2px 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      /* 8. Minimalist Inline Line Select */
+      .dd-8 .dropdown-trigger {
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid var(--accent-active);
+        border-radius: 0;
+        padding: 6px 0;
+      }
+
+      /* 9. Segmented Checkbox Multi-Menu */
+      .dd-9 .checkbox-custom {
+        width: 14px;
+        height: 14px;
+        border: 1px solid var(--card-border);
+        border-radius: 3px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+      }
+      .dd-9 .dropdown-item.selected .checkbox-custom {
+        background: var(--accent-active);
+        border-color: var(--accent-active);
+        color: #0d1117;
+      }
+
+      /* 10. Native Custom `<select>` Control */
+      select.dd-10 {
+        width: 100%;
+        padding: 10px 14px;
+        background-color: #21262d;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 0.88rem;
+        outline: none;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='%238b949e' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="gallery-title">Dropdowns & Select Menus</h1>
+    <p class="subtitle">
+      Custom option pickers, context menus, and native select styling
+    </p>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">1. Standard Select Menu</div>
+          <div class="card-description">
+            Classic custom dropdown with active item fill indicator.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-1">
+            <div class="dropdown-trigger">
+              <span>Select Role...</span>
+              <span style="font-size: 0.75rem">▼</span>
+            </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-item active">Administrator</div>
+              <div class="dropdown-item">Developer</div>
+              <div class="dropdown-item">Viewer</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.dropdown-item.active</span> {
+  background: #38bdf8;
+  color: #0d1117;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">2. Glassmorphism Popover Menu</div>
+          <div class="card-description">
+            Translucent glass overlay styling with subtle background blur.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-2">
+            <div class="dropdown-trigger">
+              <span>Options</span>
+              <span style="font-size: 0.75rem">▼</span>
+            </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-item">Edit Profile</div>
+              <div class="dropdown-item">Account Preferences</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.dropdown-menu</span> {
+  background: rgba(22, 27, 34, 0.8);
+  backdrop-filter: blur(12px);
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">3. Search Filter Select</div>
+          <div class="card-description">
+            Includes an integrated filter input box at the top of the option
+            tray.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-3">
+            <div class="dropdown-menu">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search country..."
+              />
+              <div class="dropdown-item">Canada</div>
+              <div class="dropdown-item">Germany</div>
+              <div class="dropdown-item">Japan</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.search-input</span> {
+  background: #161b22;
+  border: 1px solid #30363d;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">4. Multi-Select Tag Chips</div>
+          <div class="card-description">
+            Displays inline selected item pills directly inside the trigger
+            field.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-4">
+            <div class="dropdown-trigger">
+              <div class="tag-wrap">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+              </div>
+              <span style="font-size: 0.75rem">▼</span>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.tag</span> {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">5. Neon Edge Active Menu</div>
+          <div class="card-description">
+            Glowing cyan perimeter stroke box-shadow effect.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-5">
+            <div class="dropdown-menu">
+              <div class="dropdown-item">Production</div>
+              <div class="dropdown-item">Staging</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.dropdown-menu</span> {
+  border: 1px solid #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">6. Context Action Menu with Icons</div>
+          <div class="card-description">
+            Option list entries paired with leading action icons.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-6">
+            <div class="dropdown-menu">
+              <div class="dropdown-item"><span>✎</span> Rename</div>
+              <div class="dropdown-item"><span>⎘</span> Duplicate</div>
+              <div class="dropdown-item" style="color: #ef4444">
+                <span>🗑</span> Delete
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.dropdown-item</span> {
+  justify-content: flex-start;
+  gap: 10px;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">7. Categorized Grouped Select</div>
+          <div class="card-description">
+            Organized options sorted under non-selectable header labels.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-7">
+            <div class="dropdown-menu">
+              <div class="group-label">Frontend</div>
+              <div class="dropdown-item">React</div>
+              <div class="group-label">Backend</div>
+              <div class="dropdown-item">Node.js</div>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.group-label</span> {
+  font-size: 0.72rem;
+  color: #8b949e;
+  text-transform: uppercase;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">8. Minimalist Inline Line Select</div>
+          <div class="card-description">
+            Border-less flat trigger utilizing a single bottom accent line.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-8">
+            <div class="dropdown-trigger">
+              <span>Sorting: Popularity</span>
+              <span style="font-size: 0.75rem">▼</span>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.dropdown-trigger</span> {
+  background: transparent;
+  border-bottom: 2px solid #38bdf8;
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">9. Segmented Checkbox Multi-Menu</div>
+          <div class="card-description">
+            Option entries incorporating visual selection checkboxes.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="dropdown-container dd-9">
+            <div class="dropdown-menu">
+              <div class="dropdown-item selected">
+                <span>Notifications</span>
+                <span class="checkbox-custom">✓</span>
+              </div>
+              <div class="dropdown-item">
+                <span>Dark Mode</span>
+                <span class="checkbox-custom"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.checkbox-custom</span> {
+  width: 14px; height: 14px;
+  border: 1px solid #30363d;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

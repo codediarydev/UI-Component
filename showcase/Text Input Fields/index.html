@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Input Fields Showcase</title>
+    <style>
+      /* --- CSS Variables / Theme --- */
+      :root {
+        --page-bg: #0d1117;
+        --card-bg: #161b22;
+        --card-border: #30363d;
+        --highlight-border: #1a7f37;
+        --accent-active: #38bdf8;
+        --text-main: #c9d1d9;
+        --text-sub: #8b949e;
+        --code-main: #ff7b72;
+        --code-sub: #79c0ff;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: var(--page-bg);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1.gallery-title {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: var(--accent-active);
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        margin-bottom: 40px;
+      }
+
+      /* Container for vertically stacked cards */
+      .container {
+        width: 100%;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      /* Card Layout Structure */
+      .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--highlight-border);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      .card-description {
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+
+      /* Large Playground Section */
+      .playground {
+        height: 220px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
+        border-bottom: 1px solid var(--card-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Code Snippet Formatting */
+      .code-snippet {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 16px 20px;
+      }
+
+      .code-snippet pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .code-snippet code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.88rem;
+        color: var(--code-sub);
+      }
+
+      .sel {
+        color: var(--code-main);
+        font-weight: 500;
+      }
+
+      /* --- Base Input Group Container --- */
+      .input-group {
+        position: relative;
+        width: 280px;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px 16px;
+        background: #0d1117;
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 0.95rem;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      /* ================= 10 TEXT INPUT VARIANTS ================= */
+
+      /* 1. Floating Label (Material Style) */
+      .input-1 {
+        padding: 16px 14px 8px 14px !important;
+      }
+      .input-1 ~ label {
+        position: absolute;
+        left: 14px;
+        top: 12px;
+        color: var(--text-sub);
+        font-size: 0.9rem;
+        pointer-events: none;
+        transition: all 0.2s ease;
+      }
+      .input-1:focus ~ label,
+      .input-1:not(:placeholder-shown) ~ label {
+        top: 4px;
+        font-size: 0.7rem;
+        color: var(--accent-active);
+      }
+      .input-1:focus {
+        border-color: var(--accent-active);
+      }
+
+      /* 2. Expanding Bottom Underline */
+      .input-2-wrap {
+        position: relative;
+      }
+      .input-2 {
+        border: none !important;
+        border-bottom: 1px solid var(--card-border) !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        padding-left: 0 !important;
+      }
+      .input-2-wrap::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--accent-active);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+      .input-2-wrap:focus-within::after {
+        width: 100%;
+      }
+
+      /* 3. Glowing Pulse Border */
+      .input-3:focus {
+        border-color: var(--accent-active);
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      }
+
+      /* 4. Left Icon Integration */
+      .input-4-wrap {
+        position: relative;
+      }
+      .input-4-wrap .icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-sub);
+        transition: color 0.3s ease;
+      }
+      .input-4 {
+        padding-left: 38px !important;
+      }
+      .input-4:focus {
+        border-color: var(--accent-active);
+      }
+      .input-4:focus ~ .icon {
+        color: var(--accent-active);
+      }
+
+      /* 5. Minimalist Inset Shadow */
+      .input-5 {
+        background: #090d13 !important;
+        border: 1px solid #1f242c !important;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+      }
+      .input-5:focus {
+        border-color: var(--accent-active) !important;
+        box-shadow:
+          inset 0 2px 4px rgba(0, 0, 0, 0.6),
+          0 0 0 1px var(--accent-active);
+      }
+
+      /* 6. Dynamic Border Draw (Gradient) */
+      .input-6-wrap {
+        position: relative;
+        border-radius: 8px;
+        padding: 1px;
+        background: var(--card-border);
+        transition: background 0.3s ease;
+      }
+      .input-6-wrap:focus-within {
+        background: linear-gradient(90deg, #38bdf8, #818cf8);
+      }
+      .input-6 {
+        border: none !important;
+      }
+
+      /* 7. Corner Bracket Focus Frame */
+      .input-7-wrap {
+        position: relative;
+      }
+      .input-7-wrap::before,
+      .input-7-wrap::after {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+      .input-7-wrap::before {
+        top: -2px;
+        left: -2px;
+        border-top-color: var(--accent-active);
+        border-left-color: var(--accent-active);
+        opacity: 0;
+      }
+      .input-7-wrap::after {
+        bottom: -2px;
+        right: -2px;
+        border-bottom-color: var(--accent-active);
+        border-right-color: var(--accent-active);
+        opacity: 0;
+      }
+      .input-7-wrap:focus-within::before,
+      .input-7-wrap:focus-within::after {
+        opacity: 1;
+      }
+
+      /* 8. Glassmorphic Frosted Field */
+      .input-8 {
+        background: rgba(255, 255, 255, 0.03) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
+      .input-8:focus {
+        background: rgba(255, 255, 255, 0.07) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+      }
+
+      /* 9. Animated Placeholder Slide */
+      .input-9::placeholder {
+        transition: all 0.3s ease;
+        color: var(--text-sub);
+      }
+      .input-9:focus::placeholder {
+        transform: translateX(10px);
+        opacity: 0;
+      }
+      .input-9:focus {
+        border-color: var(--accent-active);
+      }
+
+      /* 10. Status Indicator Pop */
+      .input-10-wrap {
+        position: relative;
+      }
+      .input-10-wrap .status-dot {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%) scale(0);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #22c55e;
+        transition: transform 0.3s ease;
+      }
+      .input-10:valid:not(:placeholder-shown) ~ .status-dot {
+        transform: translateY(-50%) scale(1);
+      }
+      .input-10:focus {
+        border-color: var(--accent-active);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="gallery-title">Text Input Fields</h1>
+    <p class="subtitle">
+      Focus inputs to test interactive label and focus states
+    </p>
+
+    <div class="container">
+      <!-- Variant 1 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">1. Floating Label</div>
+          <div class="card-description">
+            Label moves upward and scales down on focus or input.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group">
+            <input type="text" id="in1" class="input-1" placeholder=" " />
+            <label for="in1">Username</label>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:focus ~ label, .input:not(:placeholder-shown) ~ label</span> {
+  top: 4px;
+  font-size: 0.7rem;
+  color: #38bdf8;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 2 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">2. Expanding Bottom Underline</div>
+          <div class="card-description">
+            Border line expands outward from the center when active.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group input-2-wrap">
+            <input
+              type="text"
+              class="input-2"
+              placeholder="Enter email address..."
+            />
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input-wrap:focus-within::after</span> {
+  width: 100%;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 3 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">3. Glowing Pulse Border</div>
+          <div class="card-description">
+            Soft neon aura surrounds the border on focus.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group">
+            <input
+              type="text"
+              class="input-3"
+              placeholder="Search components..."
+            />
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:focus</span> {
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 4 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">4. Left Icon Integration</div>
+          <div class="card-description">
+            Integrated prefix icon that highlights with focus.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group input-4-wrap">
+            <input type="text" class="input-4" placeholder="Search..." />
+            <span class="icon">🔍</span>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:focus ~ .icon</span> {
+  color: #38bdf8;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 5 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">5. Minimalist Inset Shadow</div>
+          <div class="card-description">
+            Deep set inner shadow simulating a recessed surface.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group">
+            <input
+              type="text"
+              class="input-5"
+              placeholder="Enter password..."
+            />
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input</span> {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 6 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">6. Dynamic Gradient Border</div>
+          <div class="card-description">
+            Reveals a vivid gradient border wrapper upon active focus.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group">
+            <div class="input-6-wrap">
+              <input
+                type="text"
+                class="input-6"
+                placeholder="Gradient highlight..."
+              />
+            </div>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input-wrap:focus-within</span> {
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 7 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">7. Corner Bracket Focus Frame</div>
+          <div class="card-description">
+            Corner framing brackets appear around the perimeter.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group input-7-wrap">
+            <input
+              type="text"
+              class="input-7"
+              placeholder="Tech bracket frame..."
+            />
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input-wrap:focus-within::before, .input-wrap:focus-within::after</span> {
+  opacity: 1;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 8 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">8. Glassmorphic Frosted Field</div>
+          <div class="card-description">
+            Semi-transparent translucent surface with backdrop blur.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group">
+            <input
+              type="text"
+              class="input-8"
+              placeholder="Translucent glass..."
+            />
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input</span> {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 9 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">9. Animated Placeholder Slide</div>
+          <div class="card-description">
+            Placeholder text slides smoothly to the right on interaction.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group">
+            <input type="text" class="input-9" placeholder="Type here..." />
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:focus::placeholder</span> {
+  transform: translateX(10px);
+  opacity: 0;
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Variant 10 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">10. Status Indicator Pop</div>
+          <div class="card-description">
+            Pops a green indicator dot when field contains valid text.
+          </div>
+        </div>
+        <div class="playground">
+          <div class="input-group input-10-wrap">
+            <input
+              type="text"
+              class="input-10"
+              placeholder="Type to validate..."
+              required
+            />
+            <span class="status-dot"></span>
+          </div>
+        </div>
+        <div class="code-snippet">
+          <pre><code><span class="sel">.input:valid:not(:placeholder-shown) ~ .status-dot</span> {
+  transform: translateY(-50%) scale(1);
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

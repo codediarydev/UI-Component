@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Players & Audio Controls Showcase</title>
+  <style>
+    /* --- CSS Variables / Theme --- */
+    :root {
+      --page-bg: #0d1117;
+      --card-bg: #161b22;
+      --card-border: #30363d;
+      --highlight-border: #1a7f37;
+      --accent-active: #38bdf8;
+      --text-main: #c9d1d9;
+      --text-sub: #8b949e;
+      --code-main: #ff7b72;
+      --code-sub: #79c0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--page-bg);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1.gallery-title {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      color: var(--accent-active);
+    }
+
+    p.subtitle {
+      color: var(--text-sub);
+      margin-bottom: 40px;
+    }
+
+    /* Container for vertically stacked cards */
+    .container {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Card Layout Structure */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--highlight-border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+
+    /* Large Playground Section */
+    .playground {
+      min-height: 220px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    /* Code Snippet Formatting */
+    .code-snippet {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 16px 20px;
+    }
+
+    .code-snippet pre {
+      margin: 0;
+      white-space: pre-wrap;
+    }
+
+    .code-snippet code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.88rem;
+      color: var(--code-sub);
+    }
+
+    .sel { color: var(--code-main); font-weight: 500; }
+
+    /* Common Media Button Reset */
+    .media-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    /* ================= 10 MEDIA PLAYER VARIANTS ================= */
+
+    /* 1. Minimalist Sleek Scrub Bar */
+    .player-1 {
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .track-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+    .scrub-bar {
+      width: 100%;
+      height: 6px;
+      background: #30363d;
+      border-radius: 3px;
+      position: relative;
+      cursor: pointer;
+    }
+    .scrub-progress {
+      width: 45%;
+      height: 100%;
+      background: var(--accent-active);
+      border-radius: 3px;
+      position: relative;
+    }
+    .scrub-progress::after {
+      content: '';
+      position: absolute;
+      right: -5px;
+      top: -3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    /* 2. Floating Pill Audio Control Bar */
+    .player-2 {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 24px;
+      background: #21262d;
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+    }
+    .play-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent-active);
+      color: #0d1117;
+      font-size: 0.9rem;
+    }
+
+    /* 3. Equalizer Waveform Visualizer */
+    .wave-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 32px;
+    }
+    .wave-bar {
+      width: 4px;
+      background: #818cf8;
+      border-radius: 2px;
+      animation: bounce 1.2s infinite ease-in-out alternate;
+    }
+    .wave-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .wave-bar:nth-child(2) { height: 90%; animation-delay: 0.3s; }
+    .wave-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+    .wave-bar:nth-child(4) { height: 100%; animation-delay: 0.4s; }
+    .wave-bar:nth-child(5) { height: 30%; animation-delay: 0.5s; }
+    @keyframes bounce {
+      0% { height: 20%; }
+      100% { height: 100%; }
+    }
+
+    /* 4. Compact Podcast Track Card */
+    .player-4 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #161b22;
+      border: 1px solid var(--card-border);
+      padding: 12px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .art-square {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ec4899, #818cf8);
+    }
+
+    /* 5. Radial Circular Play Trigger */
+    .play-radial {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #21262d;
+      border: 2px solid var(--accent-active);
+      color: var(--accent-active);
+      font-size: 1.5rem;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+    }
+
+    /* 6. Volume Control Slider HUD */
+    .player-6 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #21262d;
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+    .vol-slider {
+      width: 100px;
+      height: 4px;
+      background: #30363d;
+      border-radius: 2px;
+      position: relative;
+    }
+    .vol-level {
+      width: 70%;
+      height: 100%;
+      background: #22c55e;
+      border-radius: 2px;
+    }
+
+    /* 7. Glassmorphism Floating Deck */
+    .player-7 {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 28px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+    }
+
+    /* 8. Neon Ambient Glow Deck */
+    .player-8 {
+      background: #161b22;
+      border: 1px solid #ec4899;
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+      padding: 16px 24px;
+      border-radius: 12px;
+      display: flex;
+      gap: 16px;
+    }
+
+    /* 9. Playback Speed Selector Toggle */
+    .player-9 {
+      display: flex;
+      gap: 6px;
+      background: #21262d;
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .speed-btn {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      border-radius: 6px;
+    }
+    .speed-btn.active {
+      background: var(--accent-active);
+      color: #0d1117;
+    }
+
+    /* 10. Split Track Control Strip */
+    .player-10 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 380px;
+      padding: 12px 20px;
+      background: #21262d;
+      border-top: 2px solid var(--accent-active);
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="gallery-title">Media Players & Audio Controls</h1>
+  <p class="subtitle">Scrubbers, playback controls, equalizers, and volume interfaces</p>
+
+  <div class="container">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">1. Minimalist Sleek Scrub Bar</div>
+        <div class="card-description">Precision timeline slider displaying played progress and total length.</div>
+      </div>
+      <div class="playground">
+        <div class="player-1">
+          <div class="scrub-bar">
+            <div class="scrub-progress"></div>
+          </div>
+          <div class="track-info">
+            <span>01:42</span>
+            <span>03:45</span>
+          </div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.scrub-progress</span> {
+  width: 45%;
+  background: #38bdf8;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">2. Floating Pill Audio Control Bar</div>
+        <div class="card-description">Pill-shaped playback bar equipped with primary action triggers.</div>
+      </div>
+      <div class="playground">
+        <div class="player-2">
+          <button class="media-btn">⏮</button>
+          <button class="media-btn play-circle">▶</button>
+          <button class="media-btn">⏭</button>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.play-circle</span> {
+  width: 36px; height: 36px;
+  background: #38bdf8;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">3. Equalizer Waveform Visualizer</div>
+        <div class="card-description">Animated dynamic audio spectrum frequency indicator bars.</div>
+      </div>
+      <div class="playground">
+        <div class="wave-bars">
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+          <div class="wave-bar"></div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.wave-bar</span> {
+  animation: bounce 1.2s infinite ease-in-out alternate;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">4. Compact Podcast Track Card</div>
+        <div class="card-description">Pairs album cover art with episode title and inline playback controls.</div>
+      </div>
+      <div class="playground">
+        <div class="player-4">
+          <div class="art-square"></div>
+          <div style="flex:1;">
+            <div style="font-size:0.85rem; font-weight:600; color:#fff;">Episode #42</div>
+            <div style="font-size:0.75rem; color:var(--text-sub);">Tech Talks</div>
+          </div>
+          <button class="media-btn" style="font-size:1.2rem;">▶</button>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.track-card</span> {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">5. Radial Circular Play Trigger</div>
+        <div class="card-description">Hero action button featuring an ambient active glow ring.</div>
+      </div>
+      <div class="playground">
+        <button class="media-btn play-radial">▶</button>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.play-radial</span> {
+  border: 2px solid #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">6. Volume Control Slider HUD</div>
+        <div class="card-description">Compact output gain bar paired with a speaker status icon.</div>
+      </div>
+      <div class="playground">
+        <div class="player-6">
+          <span style="font-size:0.85rem;">🔊</span>
+          <div class="vol-slider">
+            <div class="vol-level"></div>
+          </div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.vol-level</span> {
+  width: 70%;
+  background: #22c55e;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">7. Glassmorphism Floating Deck</div>
+        <div class="card-description">Translucent backdrop frame with elevated media action triggers.</div>
+      </div>
+      <div class="playground">
+        <div class="player-7">
+          <button class="media-btn">🔀</button>
+          <button class="media-btn" style="font-size:1.1rem;">⏸</button>
+          <button class="media-btn">🔁</button>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.glass-deck</span> {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">8. Neon Ambient Glow Deck</div>
+        <div class="card-description">Magenta halo container designed for high-energy music interfaces.</div>
+      </div>
+      <div class="playground">
+        <div class="player-8">
+          <button class="media-btn">⏮</button>
+          <button class="media-btn" style="color:#ec4899; font-size:1.2rem;">▶</button>
+          <button class="media-btn">⏭</button>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.neon-deck</span> {
+  border-color: #ec4899;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">9. Playback Speed Selector Toggle</div>
+        <div class="card-description">Segmented multiplier controls for variable speech playback.</div>
+      </div>
+      <div class="playground">
+        <div class="player-9">
+          <button class="media-btn speed-btn">1.0x</button>
+          <button class="media-btn speed-btn active">1.5x</button>
+          <button class="media-btn speed-btn">2.0x</button>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.speed-btn.active</span> {
+  background: #38bdf8;
+  color: #0d1117;
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">10. Split Track Control Strip</div>
+        <div class="card-description">Full-width bottom dock strip featuring a cyan accent stroke indicator.</div>
+      </div>
+      <div class="playground">
+        <div class="player-10">
+          <div style="font-size:0.8rem; color:#fff;">Midnight City</div>
+          <div style="display:flex; gap:12px;">
+            <button class="media-btn">⏮</button>
+            <button class="media-btn">▶</button>
+            <button class="media-btn">⏭</button>
+          </div>
+        </div>
+      </div>
+      <div class="code-snippet">
+<pre><code><span class="sel">.control-strip</span> {
+  border-top: 2px solid #38bdf8;
+}</code></pre>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

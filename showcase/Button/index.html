@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Hover Animations Showcase</title>
+    <style>
+      :root {
+        --bg-color: #0f172a;
+        --card-bg: #1e293b;
+        --border-color: #334155;
+        --accent-color: #38bdf8;
+        --text-main: #f8fafc;
+        --text-sub: #94a3b8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        font-size: 2.2rem;
+        color: var(--accent-color);
+      }
+
+      p.subtitle {
+        color: var(--text-sub);
+        margin-bottom: 30px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .card-info h2 {
+        font-size: 1.2rem;
+      }
+
+      .card-info p {
+        font-size: 0.85rem;
+        color: var(--text-sub);
+      }
+
+      .preview-box {
+        height: 250px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      /* Common Button Styles */
+      .btn {
+        position: relative;
+        padding: 12px 28px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #fff;
+        background: transparent;
+        border: 2px solid var(--accent-color);
+        border-radius: 6px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      /* --- 1. Rotate --- */
+      .btn-rotate:hover {
+        transform: rotate(-5deg) scale(1.05);
+      }
+
+      /* --- 2. Magnetic Lift --- */
+      .btn-lift:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+      }
+
+      /* --- 3. Underline --- */
+      .btn-underline {
+        border: none;
+      }
+      .btn-underline::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background-color: var(--accent-color);
+        transition: width 0.3s ease;
+      }
+      .btn-underline:hover::after {
+        width: 100%;
+      }
+
+      /* --- 4. Corner Fill --- */
+      .btn-corner {
+        z-index: 1;
+        overflow: hidden;
+      }
+      .btn-corner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        background: var(--accent-color);
+        z-index: -1;
+        transition: all 0.3s ease;
+      }
+      .btn-corner:hover::before {
+        width: 100%;
+        height: 100%;
+      }
+      .btn-corner:hover {
+        color: #000;
+      }
+
+      /* --- 5. Double Border --- */
+      .btn-double {
+        border: 2px solid var(--accent-color);
+      }
+      .btn-double::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border: 2px solid var(--accent-color);
+        border-radius: 6px;
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+      .btn-double:hover::before {
+        inset: -8px;
+        opacity: 1;
+      }
+
+      /* --- 6. Liquid Fill --- */
+      .btn-liquid {
+        overflow: hidden;
+        z-index: 1;
+      }
+      .btn-liquid::before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 150%;
+        height: 150%;
+        background: var(--accent-color);
+        border-radius: 40%;
+        transform: translateX(-50%);
+        z-index: -1;
+        transition: all 0.5s ease;
+      }
+      .btn-liquid:hover::before {
+        top: -20%;
+      }
+      .btn-liquid:hover {
+        color: #000;
+      }
+
+      /* --- 7. Pulse --- */
+      @keyframes pulse-anim {
+        0% {
+          box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(56, 189, 248, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+        }
+      }
+      .btn-pulse:hover {
+        animation: pulse-anim 1s infinite;
+      }
+
+      /* --- 8. Skew --- */
+      .btn-skew:hover {
+        transform: skewX(-12deg) scale(1.05);
+      }
+
+      /* --- 9. Glow Border --- */
+      @keyframes glow-anim {
+        0% {
+          box-shadow: 0 0 5px #38bdf8;
+        }
+        50% {
+          box-shadow:
+            0 0 20px #38bdf8,
+            0 0 30px #38bdf8;
+        }
+        100% {
+          box-shadow: 0 0 5px #38bdf8;
+        }
+      }
+      .btn-glow:hover {
+        animation: glow-anim 1.5s infinite alternate;
+      }
+
+      /* --- 10. Slide Expand --- */
+      .btn-slide {
+        z-index: 1;
+        overflow: hidden;
+      }
+      .btn-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--accent-color);
+        z-index: -1;
+        transition: left 0.3s ease;
+      }
+      .btn-slide:hover::before {
+        left: 0;
+      }
+      .btn-slide:hover {
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Button Hover Gallery</h1>
+    <p class="subtitle">Scroll to explore different CSS hover animations</p>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-info">
+          <h2>1. Rotate</h2>
+          <p>Rotates and scales slightly on hover</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-rotate">Rotate</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>2. Magnetic Lift</h2>
+          <p>Lifts upward with a soft drop shadow</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-lift">Lift</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>3. Underline</h2>
+          <p>Minimal underline sweep from left to right</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-underline">Underline</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>4. Corner Fill</h2>
+          <p>Fills background starting from the top-left corner</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-corner">Corner</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>5. Double Border</h2>
+          <p>Expands a secondary outer frame outwards</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-double">Double</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>6. Liquid Fill</h2>
+          <p>Fills upwards like liquid rising</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-liquid">Liquid</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>7. Pulse</h2>
+          <p>Continuous glowing ripple animation</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-pulse">Pulse</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>8. Skew</h2>
+          <p>Applies an aggressive dynamic angle transform</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-skew">Skew</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>9. Glow Border</h2>
+          <p>Pulsing high-energy drop shadow glow</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-glow">Electric</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-info">
+          <h2>10. Slide Fill</h2>
+          <p>Smooth horizontal background cover</p>
+        </div>
+        <div class="preview-box">
+          <button class="btn btn-slide">Slide</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
