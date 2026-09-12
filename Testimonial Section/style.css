@@ -1,0 +1,196 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #fafbe8;
+}
+html {
+  font-size: 45%;
+}
+.main-container {
+  padding: 5rem 12rem;
+}
+.heading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: #edff9b;
+  padding: 10px 22px;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+.heading {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+}
+.sub-description {
+  font-size: 2rem;
+  color: #777;
+  margin-bottom: 0.5rem;
+}
+.col-ored {
+  color: orangered;
+  font-weight: 700;
+}
+.profile-img {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+}
+.feature-container {
+  display: flex;
+  gap: 8rem;
+}
+.feature-section {
+  margin: 2rem auto;
+  font-size: 1.8rem;
+  padding: 4rem;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  gap: 3rem;
+}
+.card {
+  position: relative;
+  padding: 5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  overflow: hidden;
+}
+.card-row-1 {
+  display: flex;
+  gap: 3rem;
+  height: 70px;
+}
+.card-row-1-col-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  color: #777;
+}
+.person-name {
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: #111;
+}
+.review-star {
+  color: orange;
+}
+.card-row-1-col-3 {
+  display: flex;
+  gap: 0.8rem;
+  padding-top: 2rem;
+}
+.card-row-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  padding-top: 3rem;
+  height: 110px;
+}
+.quote-icon-box {
+  position: absolute;
+  top: -3rem;
+  left: -1.6rem;
+  font-weight: 800;
+  font-size: 3.8rem;
+  color: #ecf2ad;
+}
+.review-description {
+  color: #555;
+  font-size: 1.8rem;
+  font-weight: 600;
+  max-width: 50ch;
+}
+.card-row-3 {
+  display: flex;
+  gap: 2rem;
+}
+.card-row-3-icon-left {
+  font-size: 3.2rem;
+  background-color: #edff9b;
+  padding: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-3-description-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.card-footer-heading {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #777;
+}
+.card-footer-subheading {
+  color: #111;
+  font-weight: 600;
+  font-weight: 2.4rem;
+}
+
+.test-icon-container {
+  display: flex;
+  gap: 3rem;
+  font-size: 2.6rem;
+  align-items: center;
+  justify-content: center;
+}
+.icon-bg {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.204);
+  transition: background-color 0.3s ease-in-out;
+}
+.icon-bg:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+.page-picker {
+  display: flex;
+  gap: 12px;
+}
+.page-picker input {
+  display: none;
+}
+.page-picker label {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ecf2ad;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.page-picker input:checked + label {
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 5px #222;
+  background: #d8ec6a;
+}
