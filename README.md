@@ -139,3 +139,5 @@ This project is intended for learning and personal use. If you are using it in a
 
 CodeNCraft UI Collection
 checking
+checking 1
+git status --short --branch && git push origin main
