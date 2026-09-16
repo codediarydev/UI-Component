@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Capstone Projects</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- SideBar -->
+      <aside class="sidebar">
+        <div class="logo">◆ Nova <span>Admin</span></div>
+        <div class="nav-group-label">Main</div>
+        <nav>
+          <a href="#" class="active">📊 Dashboard</a>
+          <a href="#">🛒 Orders</a>
+          <a href="#">📦 Products</a>
+          <a href="#">👥 Customers</a>
+        </nav>
+        <div class="nav-group-label">Management</div>
+        <nav>
+          <a href="#">📈 Analytics</a>
+          <a href="#">💬 Messages</a>
+          <a href="#">⚙️ Settings</a>
+        </nav>
+        <div class="sidebar-footer">
+          <img src="https://i.pravatar.cc/60?img=32" alt="admin" />
+          <div>
+            <div class="name">Alex Kim</div>
+            <div class="role">Administrator</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <div class="main">
+        <!-- Top bar -->
+        <header class="topbar">
+          <div class="topbar-search">
+            🔍
+            <input
+              type="text"
+              placeholder="Search orders, products, customers..."
+            />
+          </div>
+          <div class="topbar-right">
+            <div class="icon-btn">🔔 <span class="dot"></span></div>
+            <div class="icon-btn">✉️</div>
+            <div class="topbar-profile">
+              <img src="https://i.pravatar.cc/60?img=32" alt="admin" />
+              <span class="admin-name-top">Alex Kim ▾</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+          <div class="content-header">
+            <div>
+              <h1>Welcome back, Alex 👋</h1>
+              <p>Here's what's happening with your store today.</p>
+            </div>
+            <button class="btn-primary">+ Add Product</button>
+          </div>
+
+          <!-- STAT CARDS -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-top">
+                <div class="stat-icon blue">💰</div>
+                <span class="stat-trend up">+12.4%</span>
+              </div>
+              <div class="stat-value">$48,290</div>
+              <div class="stat-label">Total Revenue</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <div class="stat-icon green">🛒</div>
+                <span class="stat-trend up">+8.1%</span>
+              </div>
+              <div class="stat-value">1,204</div>
+              <div class="stat-label">Total Orders</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <div class="stat-icon orange">👥</div>
+                <span class="stat-trend up">+3.6%</span>
+              </div>
+              <div class="stat-value">8,940</div>
+              <div class="stat-label">Total Customers</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <div class="stat-icon pink">↩️</div>
+                <span class="stat-trend down">-1.2%</span>
+              </div>
+              <div class="stat-value">32</div>
+              <div class="stat-label">Refund Requests</div>
+            </div>
+          </div>
+
+          <!-- TABLE + ACTIVITY -->
+          <div class="main-grid">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Recent Orders</h3>
+                <a href="#">View all</a>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="cell-user">
+                        <img src="https://i.pravatar.cc/40?img=5" alt="" />
+                        <div class="u-name">Emma Watson</div>
+                        <div class="u-mail">emma@gmail.com</div>
+                      </div>
+                    </td>
+                    <td>Wireless HeadSet</td>
+                    <td>$89.00</td>
+                    <td><span class="status-pill paid">Paid</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="cell-user">
+                        <img src="https://i.pravatar.cc/40?img=8" alt="" />
+                        <div class="u-name">James Cooper</div>
+                        <div class="u-mail">james@gmail.com</div>
+                      </div>
+                    </td>
+                    <td>Running Shoes</td>
+                    <td>$120.00</td>
+                    <td><span class="status-pill pending">Pending</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="cell-user">
+                        <img src="https://i.pravatar.cc/40?img=9" alt="" />
+                        <div class="u-name">Nina Patel</div>
+                        <div class="u-mail">nina@gmail.com</div>
+                      </div>
+                    </td>
+                    <td>Desk Lamp</td>
+                    <td>$34.50</td>
+                    <td><span class="status-pill failed">Failed</span></td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="cell-user">
+                        <img src="https://i.pravatar.cc/40?img=11" alt="" />
+                        <div class="u-name">Tom Becker</div>
+                        <div class="u-mail">tom@gmail.com</div>
+                      </div>
+                    </td>
+                    <td>BackPack</td>
+                    <td>$65.00</td>
+                    <td><span class="status-pill paid">Paid</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Recent Activity</h3>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div>
+                  <div class="activity-text">
+                    <b>Emma Watson</b> placed a new order
+                  </div>
+                  <div class="activity-time">2 minutes ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div>
+                  <div class="activity-text">
+                    <b>James Cooper</b> requested a refund
+                  </div>
+                  <div class="activity-time">18 minutes ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div>
+                  <div class="activity-text">
+                    New Product <b>"Desk Lamp"</b> added to catalog
+                  </div>
+                  <div class="activity-time">1 hour ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div>
+                  <div class="activity-text">
+                    <b>Nina Patel</b>'s' payment failed
+                  </div>
+                  <div class="activity-time">3 hours ago</div>
+                </div>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div>
+                  <div class="activity-text">Monthly report generated</div>
+                  <div class="activity-time">Yesterday</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
