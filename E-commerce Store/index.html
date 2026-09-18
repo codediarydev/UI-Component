@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ecommerce Product Store</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <div class="logo"><span>PixelFit</span></div>
+        <nav class="nav">
+          <a href="#">Home</a>
+          <a href="#" class="active">Products</a>
+          <a href="#">Categories</a>
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+        </nav>
+        <div class="header-actions">
+          <label class="search"
+            ><i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search products..." />
+          </label>
+          <button class="icon-button"><i class="fa-solid fa-user"></i></button>
+          <button class="icon-button">
+            <i class="fa-solid fa-cart-shopping"></i
+            ><span class="cart-count">2</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="container">
+        <!-- BreadCrumbs -->
+        <div class="breadcrumbs">
+          <span>Home</span>
+          <span class="separator"><i class="fa-solid fa-angle-right"></i></span>
+
+          <span>Products</span>
+          <span class="separator"><i class="fa-solid fa-angle-right"></i></span>
+
+          <span>Gym Bag</span>
+          <span class="separator"><i class="fa-solid fa-angle-right"></i></span>
+
+          <span class="curent">Flex Gym Duffle Bag</span>
+        </div>
+
+        <!-- Product section -->
+        <section class="product-card">
+          <div class="gallery">
+            <div class="thumbnails">
+              <button class="thumb active">
+                <img
+                  src="assets/imb2.jpg"
+                  alt="Flex Gym Duffle Bag front view"
+                />
+              </button>
+              <button class="thumb">
+                <img
+                  src="assets/img1.jpg"
+                  alt="Flex Gym Duffle Bag Side View"
+                />
+              </button>
+              <button class="thumb">
+                <img src="assets/img3.jpg" alt="Flex Gym Duffle Bag pocket" />
+              </button>
+              <button class="thumb">
+                <img
+                  src="assets/img4.jpg"
+                  alt="Flex Gym Duffle Bag Side View"
+                />
+              </button>
+              <button class="thumb">
+                <img
+                  src="assets/img5.jpg"
+                  alt="Flex Gym Duffle Bag Side View"
+                />
+              </button>
+              <div class="thumb-more">
+                <i class="fa-solid fa-arrow-down-long"></i>
+              </div>
+            </div>
+
+            <div class="product-stage">
+              <img src="assets/imb2.jpg" alt="Flex Gym Duffle Olive Green" />
+              <button class="stage-button prev">
+                <i class="fa-solid fa-angle-left"></i>
+              </button>
+              <button class="stage-button next">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+              <button class="expand">
+                <i class="fa-solid fa-maximize"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product Information -->
+          <div class="product-info">
+            <span class="badge">BEST SELLER</span>
+            <h1 class="product-title">Flex Gym Duffle Bag</h1>
+            <div class="rating-row">
+              <span class="stars"> ★★★★<span class="star-muted">★</span> </span>
+              <span>4.8 (324 reviews)</span>
+              <span class="separator">|</span>
+              <span>1,250+ sold</span>
+            </div>
+            <div class="price-row">
+              <span class="price">$49.99</span>
+              <span class="old-price">$69.99</span>
+              <span class="discount">29% OFF</span>
+            </div>
+            <p class="description">
+              Spacious, durable, and stylish. The Flex Gym Duffle Bag is built
+              for your active lifestyle. Perfect for gym, travel, or everyday
+              use.
+            </p>
+
+            <!-- Features -->
+            <div class="features">
+              <div class="feature">
+                <span class="feature-icon">💧</span>
+                <span class="feature-text">
+                  Water <br />
+                  Resistant
+                </span>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">👟</span>
+                <span class="feature-text">
+                  Shoe <br />
+                  Compartment
+                </span>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">🛡</span>
+                <span class="feature-text">
+                  Durable <br />
+                  Material
+                </span>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">★</span>
+                <span class="feature-text">
+                  Lightweight <br />
+                  Design
+                </span>
+              </div>
+            </div>
+
+            <!-- Color -->
+            <div class="option-label">
+              Color:
+              <strong>Olive Green</strong>
+            </div>
+            <div class="swatches">
+              <div class="swatch-wrap selected">
+                <button class="swatch olive"></button>
+              </div>
+              <div class="swatch-wrap">
+                <button class="swatch black"></button>
+              </div>
+              <div class="swatch-wrap">
+                <button class="swatch gray"></button>
+              </div>
+              <div class="swatch-wrap">
+                <button class="swatch beige"></button>
+              </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="quantity-row">
+              <div class="option-label quantity-label">Quantity:</div>
+              <div class="qunatity-control">
+                <button type="button" class="quantity-minus">-</button>
+                <span class="quantity-value"> 1 </span>
+                <button type="button" class="quantity-plus">+</button>
+              </div>
+            </div>
+
+            <!-- action buttons -->
+            <div class="actions">
+              <button class="btn btn-primary">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Add to Cart
+              </button>
+              <button class="btn btn-secondary">Buy Now</button>
+            </div>
+
+            <!-- Trust -->
+            <div class="trust">
+              <div class="trust-item">
+                <div class="trust-icon">🚚</div>
+                <div class="trust-text">
+                  <strong>Free Delivery</strong>
+                  On orders over $50
+                </div>
+              </div>
+              <div class="trust-item">
+                <div class="trust-icon">↻</div>
+                <div class="trust-text">
+                  <strong>30-Day Return</strong>
+                  No questions asked
+                </div>
+              </div>
+              <div class="trust-item">
+                <div class="trust-icon">✓</div>
+                <div class="trust-text">
+                  <strong>Secure Payment</strong>
+                  100% safe checkout
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lower Part -->
+        <section class="lower-grid">
+          <div class="details-card">
+            <div
+              class="tabs"
+              role="tablist"
+              aria-label="Product Information tabs"
+            >
+              <button
+                class="tab active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="tab-panel-description"
+                data-tab="description"
+                id="tab-description"
+              >
+                Description
+              </button>
+
+              <button
+                class="tab"
+                type="button"
+                role="tab"
+                id="tab-specification"
+                aria-selected="false"
+                aria-controls="tab-panel-specification"
+                data-tab="specification"
+              >
+                Specifications
+              </button>
+
+              <button
+                class="tab"
+                type="button"
+                role="tab"
+                id="tab-reviews"
+                aria-selected="false"
+                aria-controls="tab-panel-reviews"
+                data-tab="reviews"
+              >
+                Reviews (324)
+              </button>
+              <button
+                class="tab"
+                type="button"
+                role="tab"
+                id="tab-shipping"
+                aria-selected="false"
+                aria-controls="tab-panel-shipping"
+                data-tab="shipping"
+              >
+                Shipping & Returns
+              </button>
+            </div>
+
+            <div class="tab-panels">
+              <section
+                class="tab-panel active"
+                id="tab-panel-description"
+                role="tabpanel"
+                aria-labelledby="tab-description"
+              >
+                <div class="details-content">
+                  <div class="details-copy">
+                    <p>
+                      The Flex Gym Duffle Bag is you ultimate workout companion.
+                      It features a spacious main compartment, a separate shoe
+                      pocket, and multiple inner pockets to keep your essentials
+                      organized.
+                    </p>
+                    <ul class="check-list">
+                      <li>
+                        <span class="check">✓</span>
+                        Large Main compartment for clothes and gear
+                      </li>
+                      <li>
+                        <span class="check">✓</span>
+                        Separate ventilated shoe compartment
+                      </li>
+                      <li>
+                        <span class="check">✓</span>
+                        Water-resistant premium fabric
+                      </li>
+                      <li>
+                        <span class="check">✓</span>
+                        Adjustable shoulder strap & padded handles
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="quality-card">
+                    <div class="quality-icon">✓</div>
+                    <h3>Premium Quality</h3>
+                    <p>
+                      Crafted with high-quality materials for long-lasting
+                      durabiley.
+                    </p>
+                    <img
+                      src="assets/imb2.jpg"
+                      alt="Flex Gym Duffle Bag"
+                      class="quality-product-image"
+                    />
+                  </div>
+                </div>
+              </section>
+
+              <section
+                id="tab-panel-specification"
+                class="tab-panel"
+                role="tabpanel"
+                aria-labelledby="tab-specification"
+                hidden
+              >
+                <div class="details-content">
+                  <div class="spec-grid">
+                    <div class="spec-row">
+                      <span>Material</span>
+                      <strong>Water-resistant nylon</strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Capacity</span>
+                      <strong>45L</strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Dimension</span>
+                      <strong>24 x 12 x 12 in</strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Weight</span>
+                      <strong>1.4 lb</strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Straps</span>
+                      <strong>Adjustable shoulder strap</strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Interior</span>
+                      <strong>2 mesh pockets + 1 zip organizer</strong>
+                    </div>
+                    <!-- <div class="spec-row">
+                      <span>Storage</span>
+                      <strong>Separated ventilated shoe compartment</strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Carry Options</span>
+                      <strong>Top handle + detachable strap</strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Color</span>
+                      <strong>Olive Green, black, gray, beige </strong>
+                    </div>
+                    <div class="spec-row">
+                      <span>Warranty</span>
+                      <strong>1 year limited</strong>
+                    </div> -->
+                  </div>
+                </div>
+              </section>
+
+              <section
+                id="tab-panel-reviews"
+                class="tab-panel"
+                role="tabpanel"
+                aria-labelledby="tab-reviews"
+                hidden
+              >
+                <div class="details-content reviews-content">
+                  <div class="review-summary">
+                    <div class="review-score">4.8</div>
+                    <div class="review-stars">★★★★</div>
+                    <p>Based on 324 verified customer reviews.</p>
+                  </div>
+                  <div class="review-list">
+                    <div class="review-item">
+                      <strong>Emily R.</strong>
+                      <span
+                        >"Perfect for weekends away. Plenty of space and easy to
+                        carry."</span
+                      >
+                    </div>
+                    <div class="review-item">
+                      <strong>Marcus T.</strong>
+                      <span
+                        >"Sturdy, stylish, and the shoe pocket is a huge
+                        plus."</span
+                      >
+                    </div>
+                    <div class="review-item">
+                      <strong>Sophia L.</strong>
+                      <span
+                        >"Great quality and the straps feel comfortable even
+                        when full"</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                id="tab-panel-shipping"
+                class="tab-panel"
+                role="tabpanel"
+                aria-labelledby="tab-shipping"
+                hidden
+              >
+                <div class="details-content shipping-content">
+                  <div>
+                    <h3>Shipping</h3>
+                    <p>
+                      Free standard shipping on orders over $50. Express
+                      delivery available in 2-3 days.
+                    </p>
+                  </div>
+                  <div>
+                    <h3>Returns</h3>
+                    <p>
+                      Easy 30-day returns on unused items. Damaged or incorrect
+                      orders are replaced at no cost.
+                    </p>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <!-- Related Products -->
+          <aside class="related-card">
+            <div class="related-head">
+              <h2>You may also like</h2>
+              <a href="#">View All</a>
+            </div>
+            <div class="related-products">
+              <div class="related">
+                <div class="related-image">
+                  <img src="assets/bottle.jpg" alt="Stainless Steel Bottle" />
+                </div>
+                <div class="related-info">
+                  <div class="related-name">Stainless Steel Bottle</div>
+                  <div class="related-subtitle">750ml, Leak Proof</div>
+                  <div class="related-rating">★ 4.7</div>
+                </div>
+                <div class="related-right">
+                  <div class="related-price">$19.99</div>
+                  <button class="add-mini">+</button>
+                </div>
+              </div>
+
+              <div class="related">
+                <div class="related-image">
+                  <img src="assets/band.jpg" alt="Flex Resistance Bands" />
+                </div>
+                <div class="related-info">
+                  <div class="related-name">Flex Resistance Bands</div>
+                  <div class="related-subtitle">Set of 5</div>
+                  <div class="related-rating">★ 4.6</div>
+                </div>
+                <div class="related-right">
+                  <div class="related-price">$14.99</div>
+                  <button class="add-mini">+</button>
+                </div>
+              </div>
+
+              <div class="related">
+                <div class="related-image">
+                  <img src="assets/towel.jpg" alt="Gym Towel" />
+                </div>
+                <div class="related-info">
+                  <div class="related-name">Gym Towel</div>
+                  <div class="related-subtitle">100% Cotton</div>
+                  <div class="related-rating">★ 4.8</div>
+                </div>
+                <div class="related-right">
+                  <div class="related-price">$9.99</div>
+                  <button class="add-mini">+</button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
