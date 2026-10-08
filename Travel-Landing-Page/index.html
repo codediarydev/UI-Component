@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wanderly - Travel Landing Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 1. NavBar -->
+    <header class="navbar">
+      <a href="#" class="logo">Wanderly</a>
+      <nav>
+        <a href="#destination">Destinations</a>
+        <a href="#packages">Packages</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- 2. Hero section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Find your next trip</h1>
+        <p>
+          Hand-picked places, simple booking, and prices you can see upfront.
+        </p>
+
+        <div class="search-bar">
+          <input type="text" placeholder="Where to?" />
+          <input type="date" />
+          <button>Search trips</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Destination Cards -->
+    <section class="section" id="destination">
+      <h2>Popular Destinations</h2>
+      <p class="subtitle">Hover over a card to see the details.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=438&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Bali"
+          />
+          <span class="price-tag">$799</span>
+          <div class="card-info">
+            <h3>Bali, Indonesia</h3>
+            <p class="rating">&#9733; 4.9 &middot; 7 days</p>
+            <p class="details">Beaches, rice terraces and temples.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="paris"
+          />
+          <span class="price-tag">$1,099</span>
+          <div class="card-info">
+            <h3>Paris, France</h3>
+            <p class="rating">&#9733; 4.8 &middot; 5 days</p>
+            <p class="details">Museums, cafes and the Eiffel Tower</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1558870832-c8db4b5b47d1?q=80&w=388&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="kyoto"
+          />
+          <span class="price-tag">$1,249</span>
+          <div class="card-info">
+            <h3>Kyoto, Japan</h3>
+            <p class="rating">&#9733; 4.9 &middot; 8 days</p>
+            <p class="details">Old temples, gardens and street food.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Santorini"
+          />
+          <span class="price-tag">$999</span>
+          <div class="card-info">
+            <h3>Santorini, Greece</h3>
+            <p class="rating">&#9733; 4.7 &middot; 6 days</p>
+            <p class="details">White villages and sunset views.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1517079810336-d39e72287591?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Swiss Alps"
+          />
+          <span class="price-tag">$1,349</span>
+          <div class="card-info">
+            <h3>Swiss Alps</h3>
+            <p class="rating">&#9733; 4.8 &middot; 7 days</p>
+            <p class="details">Mountain trains, lakes and hiking.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img
+            src="https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Bali"
+          />
+          <span class="price-tag">$899</span>
+          <div class="card-info">
+            <h3>Dubai, UAE</h3>
+            <p class="rating">&#9733; 4.6 &middot; 4 days</p>
+            <p class="details">Skyscrapers, desert safari and malls.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Popular Packages -->
+    <section class="section packages" id="packages">
+      <h2>Popular Packages</h2>
+      <p class="subtitle">Flights, hotel and tours in one price.</p>
+      <div class="package-grid">
+        <div class="package">
+          <img
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=873&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Beach Package"
+          />
+          <div class="package-body">
+            <h3>Beach Escape</h3>
+            <p>5 nights &middot; Hotel &middot; Breakfast</p>
+            <div class="package-bottom">
+              <strong>$649</strong>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="package">
+          <img
+            src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="City Package"
+          />
+          <div class="package-body">
+            <h3>City Explorer</h3>
+            <p>4 nights &middot; Hotel &middot; City tours</p>
+            <div class="package-bottom">
+              <strong>$799</strong>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="package">
+          <img
+            src="https://images.unsplash.com/photo-1762968117300-32f41e7bf169?q=80&w=977&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Mountain Package"
+          />
+          <div class="package-body">
+            <h3>Mountain Trek</h3>
+            <p>6 nights &middot; Guide &middot; All meals</p>
+            <div class="package-bottom">
+              <strong>$949</strong>
+              <a href="#" class="btn">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Footer -->
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div>
+          <h3>Wanderly</h3>
+          <p>Plan simple, travel well.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <a href="#destination">Destinations</a>
+          <a href="#packages">Packages</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>hello@wanderly.com</p>
+          <p>+1 234 567 890</p>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 Wanderly. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
