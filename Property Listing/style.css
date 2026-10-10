@@ -1,0 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Color Variable */
+:root {
+  --navy: #14213d;
+  --blue: #2f6fed;
+  --green: #1f9d6b;
+  --orange: #f59e0b;
+  --bg: #f3f6fb;
+  --white: #ffffff;
+  --muted: #6b7690;
+  --line: #e4e9f2;
+}
+body {
+  font-family: "Courier New", Courier, monospace;
+  background: var(--bg);
+  color: var(--navy);
+  padding: 70px 40px;
+}
+a {
+  text-decoration: none;
+}
+
+/* Page Heading */
+.heading {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.heading h1 {
+  font-size: 2.6rem;
+  margin: 8px 0 10px;
+}
+.heading p {
+  color: var(--muted);
+}
+.small-title {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--blue) !important;
+}
+
+/* Card Grid */
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.card {
+  background: var(--white);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(20, 33, 61, 0.08);
+  transition: 0.3s;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 34px rgba(20, 33, 61, 0.18);
+}
+.img-box {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+}
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: 0.5s;
+}
+.card:hover .img-box img {
+  transform: scale(1.08);
+}
+.badge {
+  position: absolute;
+  top: 16px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.sale {
+  left: 16px;
+  background: var(--blue);
+}
+.rent {
+  left: 16px;
+  background: var(--green);
+}
+.featured {
+  right: 16px;
+  background: var(--orange);
+}
+.view-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  background: var(--white);
+  color: var(--navy);
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  transition: 0.3s;
+}
+.card:hover .view-btn {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.view-btn:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+.card-body {
+  padding: 22px;
+}
+.price {
+  font-size: 1.7rem;
+  color: var(--blue);
+}
+.price small {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+.card-body h3 {
+  margin: 6px 0;
+  font-size: 1.15rem;
+}
+.location {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin: 18px 0;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--navy);
+}
+.agent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.agent img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.agent-info {
+  flex: 1;
+}
+.agent-info strong {
+  display: block;
+  font-size: 0.95rem;
+}
+.agent-info small {
+  color: var(--muted);
+}
+.contact {
+  border: 2px solid var(--blue);
+  color: var(--blue);
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: 0.2s;
+}
+.contact:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+.contact:active {
+  transform: scale(0.9);
+}
